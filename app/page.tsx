@@ -1,4 +1,6 @@
 import { CaptureForm } from "@/components/capture-form"
+import { SiteNav } from "@/components/site-nav"
+import { SiteFooter } from "@/components/site-footer"
 
 const outcomes = [
   "Формулировка уточняется",
@@ -10,9 +12,7 @@ export default function Page() {
   return (
     <main className="min-h-dvh bg-background text-foreground">
       <div className="mx-auto w-full max-w-[1180px] border-x border-line/60 bg-ivory md:my-7 md:border md:shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
-        <header className="flex min-h-16 items-center border-b border-line px-6">
-          <span className="text-sm font-black uppercase tracking-[0.03em]">Игорь Беляев</span>
-        </header>
+        <SiteNav />
 
         <section className="grid grid-cols-1 items-stretch border-b border-line lg:grid-cols-[1.1fr_0.9fr]">
           {/* Copy */}
@@ -56,25 +56,7 @@ export default function Page() {
           </div>
         </section>
 
-        <footer className="bg-[var(--ink)] px-6 py-9 text-white sm:px-10">
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-            <div>
-              <strong className="text-sm">ИП Игоря Беляева</strong>
-              <p className="mt-2 text-xs leading-relaxed text-[#aaaaaa]">
-                Реквизиты ИП уточняются и будут добавлены после подтверждения.
-              </p>
-            </div>
-            <div className="text-xs leading-relaxed text-[#aaaaaa]">
-              <a href="#" className="block transition-colors hover:text-white">
-                Политика обработки персональных данных
-              </a>
-              <a href="#" className="block transition-colors hover:text-white">
-                Согласие на обработку персональных данных
-              </a>
-              <span className="mt-1 block">Электронная почта для связи: уточняется</span>
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
     </main>
   )
