@@ -67,9 +67,9 @@ const faq = [
 ]
 
 const sectionTitle =
-  "text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-tight"
+  "text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]"
 const kicker = "text-[11px] font-black uppercase tracking-[0.14em]"
-const cardTitle = "text-[clamp(1.35rem,2vw,1.6rem)] font-bold leading-tight tracking-tight"
+const cardTitle = "text-[clamp(1.35rem,1.7vw,1.625rem)] font-bold leading-[1.05] tracking-[-0.03em]"
 
 export default function MasterPage() {
   return (
@@ -82,7 +82,7 @@ export default function MasterPage() {
           <div className="flex flex-col justify-between gap-14 px-6 py-12 sm:px-10 lg:py-14">
             <div>
               <p className={kicker}>Платный онлайн мастер-класс</p>
-              <h1 className="mt-5 text-pretty text-[clamp(2.5rem,7vw,5.25rem)] font-black uppercase leading-[0.92] tracking-tight">
+              <h1 className="mt-5 text-pretty text-[clamp(2.625rem,5.7vw,4.875rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
                 Название
                 <br />
                 <span className="text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
@@ -133,7 +133,7 @@ export default function MasterPage() {
             >
               <ArrowUpRight className="size-9" strokeWidth={1.25} />
             </div>
-            <p className="relative z-[2] text-[clamp(2.5rem,6vw,4.5rem)] font-black uppercase leading-[0.9] tracking-tight">
+            <p className="relative z-[2] text-[clamp(2.5rem,5.3vw,4.25rem)] font-black uppercase leading-[0.94] tracking-[-0.03em]">
               Сильные
               <br />
               <span className="text-transparent [-webkit-text-stroke:1px_#ffffff]">переговоры</span>
@@ -145,7 +145,7 @@ export default function MasterPage() {
         <section className="relative overflow-hidden border-b border-line px-6 py-16 sm:px-10">
           <span
             aria-hidden="true"
-            className="pointer-events-none block select-none overflow-hidden whitespace-nowrap text-[clamp(3.5rem,10vw,7.5rem)] font-black leading-[0.82] tracking-tight text-[#edede9]"
+            className="pointer-events-none block select-none overflow-hidden whitespace-nowrap text-[clamp(3.375rem,8vw,7rem)] font-black leading-[0.82] tracking-[-0.04em] text-[#edede9]"
           >
             ПЕРЕГОВОРЫ
           </span>
@@ -175,7 +175,7 @@ export default function MasterPage() {
         >
           <span
             aria-hidden="true"
-            className="pointer-events-none block select-none overflow-hidden whitespace-nowrap text-[clamp(3.5rem,10vw,7.5rem)] font-black leading-[0.82] tracking-tight text-[#191919]"
+            className="pointer-events-none block select-none overflow-hidden whitespace-nowrap text-[clamp(3.375rem,8vw,7rem)] font-black leading-[0.82] tracking-[-0.04em] text-[#191919]"
           >
             РЕЗУЛЬТАТ
           </span>
@@ -226,7 +226,7 @@ export default function MasterPage() {
           <div className="flex flex-col justify-between gap-8 px-6 py-12 sm:px-10 lg:py-14">
             <div>
               <p className={kicker}>Об эксперте</p>
-              <h2 className="mt-4 text-[clamp(2.5rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-tight">
+              <h2 className="mt-4 text-[clamp(2.5rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
                 Игорь Беляев
               </h2>
               <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-charcoal sm:text-xl">

@@ -30,7 +30,7 @@ export function CaptureForm() {
           >
             <Check className="size-6" strokeWidth={2.5} />
           </span>
-          <h2 className="mt-6 text-3xl font-bold leading-tight tracking-tight text-balance sm:text-4xl">
+          <h2 className="mt-6 text-[clamp(1.75rem,3vw,2.375rem)] font-bold leading-[1.05] tracking-tight text-balance">
             Данные отправлены
           </h2>
           <p className="mt-3 leading-relaxed text-[#aaaaaa]">
@@ -50,7 +50,7 @@ export function CaptureForm() {
           <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#aaaaaa]">
             Остался всего один шаг
           </p>
-          <h2 className="mt-3 text-3xl font-bold leading-tight tracking-tight text-balance sm:text-4xl">
+          <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.375rem)] font-bold leading-[1.05] tracking-tight text-balance">
             Заберите гайд в Telegram
           </h2>
           <p className="mt-3 leading-relaxed text-[#aaaaaa]">

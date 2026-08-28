@@ -19,7 +19,7 @@ export default function Page() {
           <div className="flex flex-col justify-between gap-14 px-6 py-12 sm:px-10 lg:py-14">
             <div>
               <p className="text-[11px] font-black uppercase tracking-[0.14em]">Бесплатный материал</p>
-              <h1 className="mt-5 text-pretty text-[clamp(2.75rem,9vw,5.75rem)] font-black uppercase leading-[0.92] tracking-tight">
+              <h1 className="mt-5 text-pretty text-[clamp(2.625rem,5.8vw,5.125rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
                 Гайд
                 <br />
                 <span className="text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
