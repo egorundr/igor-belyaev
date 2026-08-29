@@ -127,6 +127,16 @@ export default function MasterPage() {
                 backgroundSize: "68px 68px",
               }}
             />
+            <svg
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full"
+              viewBox="0 0 560 600"
+              fill="none"
+              preserveAspectRatio="xMidYMid slice"
+            >
+              <circle cx="260" cy="260" r="205" stroke="rgba(255,255,255,0.28)" strokeWidth="1" />
+              <circle cx="430" cy="470" r="150" stroke="rgba(255,255,255,0.28)" strokeWidth="1" />
+            </svg>
             <div
               aria-hidden="true"
               className="absolute right-8 top-8 grid size-20 place-items-center rounded-full border border-[#777777]"
@@ -164,14 +174,7 @@ export default function MasterPage() {
         </section>
 
         {/* Результаты (dark) */}
-        <section
-          className="relative overflow-hidden border-b border-line bg-[#0b0b0b] px-6 py-16 text-white sm:px-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(#222 1px,transparent 1px),linear-gradient(90deg,#222 1px,transparent 1px)",
-            backgroundSize: "70px 70px",
-          }}
-        >
+        <section className="relative overflow-hidden border-b border-line bg-[#0b0b0b] px-6 py-16 text-white sm:px-10">
           <span
             aria-hidden="true"
             className="pointer-events-none block select-none overflow-hidden whitespace-nowrap text-[clamp(3.375rem,8vw,7rem)] font-black leading-[0.82] tracking-[-0.04em] text-[#191919]"

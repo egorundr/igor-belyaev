@@ -33,6 +33,9 @@ export default function Page() {
             </div>
 
             <div>
+              <p className="mb-4 text-[11px] font-black uppercase tracking-[0.14em] text-subtle">
+                После прочтения гайда вы получите
+              </p>
               <div className="grid grid-cols-1 border-t border-line sm:grid-cols-3">
                 {outcomes.map((outcome, index) => (
                   <div
