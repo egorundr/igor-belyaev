@@ -33,17 +33,13 @@ export default function Page() {
             </div>
 
             <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.14em]">
-                После прочтения гайда вы получите
-              </p>
-              <div className="mt-5 grid grid-cols-1 border-t border-line sm:grid-cols-3">
+              <div className="grid grid-cols-1 border-t border-line sm:grid-cols-3">
                 {outcomes.map((outcome, index) => (
                   <div
                     key={index}
                     className="border-b border-line py-4 sm:border-b-0 sm:border-r sm:py-5 sm:pr-4 sm:last:border-r-0 sm:[&:not(:first-child)]:pl-4 sm:first:pr-4"
                   >
-                    <span className="text-[11px] text-subtle">Результат</span>
-                    <strong className="mt-2 block text-lg font-bold leading-snug">{outcome}</strong>
+                    <strong className="block text-lg font-bold leading-snug">{outcome}</strong>
                   </div>
                 ))}
               </div>

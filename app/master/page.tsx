@@ -149,7 +149,6 @@ export default function MasterPage() {
           >
             ПЕРЕГОВОРЫ
           </span>
-          <p className={`mt-2 ${kicker}`}>Для кого подходит мастер-класс</p>
           <h2 className={`mt-3 ${sectionTitle}`}>Для кого</h2>
           <div className="mt-9 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {audience.map((item) => (
@@ -179,7 +178,6 @@ export default function MasterPage() {
           >
             РЕЗУЛЬТАТ
           </span>
-          <p className={`mt-2 ${kicker} text-[#aaaaaa]`}>Что вы получите</p>
           <h2 className={`mt-3 ${sectionTitle}`}>Результаты</h2>
           <div className="mt-9 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {results.map((item) => (
@@ -196,8 +194,7 @@ export default function MasterPage() {
 
         {/* Программа */}
         <section className="border-b border-line px-6 py-16 sm:px-10">
-          <p className={kicker}>Программа</p>
-          <h2 className={`mt-3 ${sectionTitle}`}>Что разберем</h2>
+          <h2 className={sectionTitle}>Что разберем</h2>
           <div className="mt-9 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {program.map((item) => (
               <div
@@ -225,8 +222,7 @@ export default function MasterPage() {
           </div>
           <div className="flex flex-col justify-between gap-8 px-6 py-12 sm:px-10 lg:py-14">
             <div>
-              <p className={kicker}>Об эксперте</p>
-              <h2 className="mt-4 text-[clamp(2.5rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+              <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
                 Игорь Беляев
               </h2>
               <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-charcoal sm:text-xl">
@@ -251,8 +247,7 @@ export default function MasterPage() {
 
         {/* Кейсы */}
         <section className="border-b border-line px-6 py-16 sm:px-10">
-          <p className={kicker}>Кейсы клиентов</p>
-          <h2 className={`mt-3 ${sectionTitle}`}>Кейсы</h2>
+          <h2 className={sectionTitle}>Кейсы</h2>
           <div className="mt-10 grid grid-cols-1 border-t border-line lg:grid-cols-3">
             {cases.map((item) => (
               <div
@@ -275,8 +270,7 @@ export default function MasterPage() {
         >
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             <div>
-              <p className={kicker}>Участие</p>
-              <h2 className={`mt-3 ${sectionTitle}`}>Стоимость и формат</h2>
+              <h2 className={sectionTitle}>Стоимость и формат</h2>
               <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-[#aaaaaa]">
                 Дата, время, длительность, наличие записи и срок доступа уточняются.
               </p>
@@ -298,8 +292,7 @@ export default function MasterPage() {
 
         {/* Вопросы */}
         <section className="border-b border-line px-6 py-16 sm:px-10">
-          <p className={kicker}>Частые вопросы</p>
-          <h2 className={`mt-3 mb-6 ${sectionTitle}`}>Вопросы</h2>
+          <h2 className={`mb-6 ${sectionTitle}`}>Вопросы</h2>
           <div>
             {faq.map((question) => (
               <details
