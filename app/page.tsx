@@ -22,7 +22,7 @@ export default function Page() {
               <h1 className="mt-5 text-pretty text-[clamp(2rem,6.5vw,4.25rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
                 Гайд
                 <br />
-                <span className="inline-block text-transparent [-webkit-text-stroke:1px_var(--charcoal)]">
+                <span className="inline-block text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
                   по переговорам
                 </span>
               </h1>
