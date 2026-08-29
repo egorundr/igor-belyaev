@@ -82,7 +82,7 @@ export default function MasterPage() {
           <div className="flex flex-col justify-between gap-14 px-6 py-12 sm:px-10 lg:py-14">
             <div>
               <p className={kicker}>Платный онлайн мастер-класс</p>
-              <h1 className="mt-5 text-pretty text-[clamp(2.625rem,5.7vw,4.875rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
+              <h1 className="mt-5 text-pretty text-[clamp(2.25rem,7vw,4.875rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
                 Название
                 <br />
                 <span className="text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
