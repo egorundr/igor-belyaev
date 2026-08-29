@@ -14,15 +14,15 @@ export default function Page() {
       <div className="mx-auto w-full max-w-[1180px] border-x border-line/60 bg-ivory md:my-7 md:border md:shadow-[0_18px_55px_rgba(0,0,0,0.08)]">
         <SiteNav />
 
-        <section className="grid grid-cols-1 items-stretch border-b border-line lg:grid-cols-[1.1fr_0.9fr]">
+        <section className="grid grid-cols-1 items-stretch border-b border-line lg:grid-cols-[1.05fr_0.95fr]">
           {/* Copy */}
-          <div className="flex flex-col justify-between gap-14 px-6 py-12 sm:px-10 lg:py-14">
+          <div className="flex min-w-0 flex-col gap-10 px-6 py-12 sm:px-10 lg:py-14 lg:pr-12">
             <div>
               <p className="text-[11px] font-black uppercase tracking-[0.14em]">Бесплатный материал</p>
-              <h1 className="mt-5 text-pretty text-[clamp(2rem,9vw,5.125rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
+              <h1 className="mt-5 text-pretty text-[clamp(2rem,6.5vw,4.25rem)] font-black uppercase leading-[0.94] tracking-[-0.035em]">
                 Гайд
                 <br />
-                <span className="inline-block whitespace-nowrap text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
+                <span className="inline-block text-transparent [-webkit-text-stroke:1.5px_var(--charcoal)]">
                   по переговорам
                 </span>
               </h1>
@@ -50,7 +50,7 @@ export default function Page() {
           </div>
 
           {/* Form */}
-          <div className="flex items-center overflow-hidden bg-[var(--ink)] px-6 py-10 sm:px-10">
+          <div className="flex min-w-0 items-center bg-[var(--ink)] px-6 py-10 sm:px-10">
             <CaptureForm />
           </div>
         </section>
