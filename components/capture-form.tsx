@@ -5,6 +5,8 @@ import { useState } from "react"
 import { Check, Send } from "lucide-react"
 
 const TELEGRAM_URL = "https://t.me/"
+const WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbwOImieOGqvqJlxXvwuKGiGaGiU1GOqa2LKcsKC1Hsjxj1qxc120Tmj0SrDSusgWBQ8fQ/exec"
 
 const fields = [
   { id: "name", label: "Имя и фамилия", placeholder: "Иван Иванов", type: "text", autoComplete: "name" },
@@ -14,10 +16,37 @@ const fields = [
 
 export function CaptureForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setSubmitted(true)
+    if (submitting) return
+
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const payload = {
+      date: new Date().toISOString(),
+      name: String(data.get("name") ?? ""),
+      phone: String(data.get("phone") ?? ""),
+      telegram: String(data.get("telegram") ?? ""),
+    }
+
+    setSubmitting(true)
+    setError(null)
+
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload),
+      })
+      setSubmitted(true)
+    } catch {
+      setError("Не удалось отправить данные. Попробуйте ещё раз.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -92,11 +121,24 @@ export function CaptureForm() {
 
             <button
               type="submit"
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 font-bold text-[var(--ink)] transition-opacity hover:opacity-90"
+              disabled={submitting}
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 font-bold text-[var(--ink)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              <Send className="size-4" />
-              Получить доступ
+              {submitting ? (
+                "Отправка..."
+              ) : (
+                <>
+                  <Send className="size-4" />
+                  Получить доступ
+                </>
+              )}
             </button>
+
+            {error ? (
+              <p role="alert" className="mt-4 text-sm text-red-400">
+                {error}
+              </p>
+            ) : null}
           </form>
         </>
       )}
