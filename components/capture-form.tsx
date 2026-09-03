@@ -2,16 +2,14 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Check, Send } from "lucide-react"
 
-const TELEGRAM_URL = "https://t.me/"
 const WEBHOOK_URL =
   "https://script.google.com/macros/s/AKfycbwOImieOGqvqJlxXvwuKGiGaGiU1GOqa2LKcsKC1Hsjxj1qxc120Tmj0SrDSusgWBQ8fQ/exec"
 
 const fields = [
-  { id: "name", label: "Имя и фамилия", placeholder: "Иван Иванов", type: "text", autoComplete: "name" },
-  { id: "phone", label: "Номер телефона", placeholder: "+7 999 000-00-00", type: "tel", autoComplete: "tel" },
-  { id: "telegram", label: "Ник в Telegram", placeholder: "@username", type: "text", autoComplete: "off" },
+  { id: "name", label: "Имя", placeholder: "Иван Иванов", type: "text", autoComplete: "name", required: true },
+  { id: "phone", label: "Телефон", placeholder: "+7 999 000-00-00", type: "tel", autoComplete: "tel", required: true },
+  { id: "telegram", label: "Ник в Telegram", placeholder: "@username", type: "text", autoComplete: "off", required: false },
 ] as const
 
 export function CaptureForm() {
@@ -49,99 +47,108 @@ export function CaptureForm() {
     }
   }
 
+  if (submitted) {
+    return (
+      <div className="flex h-full flex-col items-start justify-center rounded-2xl border border-zinc-800 bg-zinc-950 p-8 md:p-10">
+        <span
+          className="flex size-12 items-center justify-center rounded-full bg-yellow-400 text-black"
+          aria-hidden="true"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+        <h2 className="mt-6 font-sans text-3xl font-black uppercase leading-none tracking-tight text-white md:text-4xl">
+          Спасибо!
+        </h2>
+        <p className="mt-3 text-pretty leading-relaxed text-zinc-400">
+          Данные успешно отправлены. Гайд придёт вам в Telegram в ближайшее время.
+        </p>
+      </div>
+    )
+  }
+
   return (
-    <div className="w-full rounded-3xl border border-[#333333] bg-[var(--ink-soft)] p-7 text-white sm:p-8">
-      {submitted ? (
-        <div className="flex flex-col items-start">
-          <span
-            className="flex size-12 items-center justify-center rounded-full bg-white text-[var(--ink)]"
-            aria-hidden="true"
-          >
-            <Check className="size-6" strokeWidth={2.5} />
-          </span>
-          <h2 className="mt-6 text-[clamp(1.75rem,3vw,2.375rem)] font-bold leading-[1.05] tracking-tight text-balance">
-            Данные отправлены
-          </h2>
-          <p className="mt-3 leading-relaxed text-[#aaaaaa]">
-            Ваш гайд уже готов. Перейдите в Telegram, чтобы забрать материал.
-          </p>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8"
+    >
+      <div>
+        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-yellow-400">
+          Остался один шаг
+        </p>
+        <h2 className="mt-3 font-sans text-3xl font-black uppercase leading-none tracking-tight text-white md:text-4xl">
+          Заберите гайд
+        </h2>
+      </div>
+
+      <div className="flex flex-col gap-3">
+        {fields.map((field) => (
+          <div key={field.id}>
+            <label
+              htmlFor={field.id}
+              className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-[0.08em] text-zinc-400"
+            >
+              {field.label}
+              {!field.required && <span className="ml-1 font-medium text-zinc-600">(необязательно)</span>}
+            </label>
+            <input
+              id={field.id}
+              name={field.id}
+              type={field.type}
+              autoComplete={field.autoComplete}
+              required={field.required}
+              placeholder={field.placeholder}
+              className="h-12 w-full rounded-xl border border-zinc-800 bg-black px-4 text-white outline-none transition-colors placeholder:text-zinc-600 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-1 flex items-start gap-3 text-xs text-zinc-400">
+        <input
+          type="checkbox"
+          id="privacy"
+          required
+          defaultChecked
+          className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-zinc-700 bg-zinc-900 text-yellow-400 focus:ring-yellow-400 focus:ring-offset-zinc-900"
+        />
+        <label htmlFor="privacy" className="cursor-pointer select-none leading-snug">
+          Я даю{" "}
           <a
-            href={TELEGRAM_URL}
+            href="https://docs.google.com/document/d/1Az6vBCjpC2lnrKxvCkRIk8vtGkqKZv9C/edit?usp=drive_link"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-7 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 font-bold text-[var(--ink)] transition-opacity hover:opacity-90"
+            className="text-zinc-200 underline transition-colors hover:text-yellow-400"
           >
-            Перейти в Telegram
+            согласие на обработку персональных данных
+          </a>{" "}
+          в соответствии с{" "}
+          <a
+            href="https://docs.google.com/document/d/18mjLhJ1Pk6L_Lg8o-heN4RLQOUA5L9-c/edit?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-200 underline transition-colors hover:text-yellow-400"
+          >
+            политикой конфиденциальности
           </a>
-        </div>
-      ) : (
-        <>
-          <p className="text-[11px] font-black uppercase tracking-[0.14em] text-[#aaaaaa]">
-            Остался всего один шаг
-          </p>
-          <h2 className="mt-3 text-[clamp(1.75rem,3vw,2.375rem)] font-bold leading-[1.05] tracking-tight text-balance">
-            Заберите гайд в Telegram
-          </h2>
-          <p className="mt-3 leading-relaxed text-[#aaaaaa]">
-            Оставьте контактные данные, и материал станет доступен сразу после отправки формы.
-          </p>
+          .
+        </label>
+      </div>
 
-          <form onSubmit={handleSubmit} className="mt-7">
-            {fields.map((field) => (
-              <div key={field.id} className="mb-4">
-                <label
-                  htmlFor={field.id}
-                  className="mb-2 block text-[11px] font-extrabold uppercase tracking-[0.08em]"
-                >
-                  {field.label}
-                </label>
-                <input
-                  id={field.id}
-                  name={field.id}
-                  type={field.type}
-                  autoComplete={field.autoComplete}
-                  required
-                  placeholder={field.placeholder}
-                  className="h-12 w-full rounded-xl border border-[#444444] bg-[#1b1b1b] px-4 text-white outline-none transition-colors placeholder:text-[#777777] focus:border-white"
-                />
-              </div>
-            ))}
-
-            <label className="my-5 flex items-start gap-3 text-xs leading-relaxed text-[#aaaaaa]">
-              <input
-                type="checkbox"
-                required
-                className="mt-0.5 size-4 shrink-0 accent-white"
-              />
-              <span>
-                Я даю согласие на обработку персональных данных и подтверждаю, что ознакомлен(а) с
-                Политикой обработки персональных данных.
-              </span>
-            </label>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-white px-5 font-bold text-[var(--ink)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {submitting ? (
-                "Отправка..."
-              ) : (
-                <>
-                  <Send className="size-4" />
-                  Получить доступ
-                </>
-              )}
-            </button>
-
-            {error ? (
-              <p role="alert" className="mt-4 text-sm text-red-400">
-                {error}
-              </p>
-            ) : null}
-          </form>
-        </>
+      {error && (
+        <p role="alert" className="text-sm text-red-400">
+          {error}
+        </p>
       )}
-    </div>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="mt-1 h-14 w-full rounded-xl bg-yellow-400 text-base font-black uppercase tracking-wide text-black transition-colors hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {submitting ? "Отправка..." : "Забрать гайд в Telegram"}
+      </button>
+    </form>
   )
 }
