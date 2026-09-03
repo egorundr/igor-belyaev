@@ -9,7 +9,7 @@ const WEBHOOK_URL =
 const fields = [
   { id: "name", label: "Имя", placeholder: "Иван Иванов", type: "text", autoComplete: "name", required: true },
   { id: "phone", label: "Телефон", placeholder: "+7 999 000-00-00", type: "tel", autoComplete: "tel", required: true },
-  { id: "telegram", label: "Ник в Telegram", placeholder: "@username", type: "text", autoComplete: "off", required: false },
+  { id: "telegram", label: "Ник в Telegram", placeholder: "@username", type: "text", autoComplete: "off", required: true },
 ] as const
 
 export function CaptureForm() {
@@ -62,8 +62,16 @@ export function CaptureForm() {
           Спасибо!
         </h2>
         <p className="mt-3 text-pretty leading-relaxed text-zinc-400">
-          Данные успешно отправлены. Гайд придёт вам в Telegram в ближайшее время.
+          Данные успешно отправлены. Перейдите в Telegram-бота, чтобы забрать гайд.
         </p>
+        <a
+          href="https://t.me/belyaev_negotiyations_bot"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-flex h-14 w-full items-center justify-center rounded-xl bg-yellow-400 text-base font-black uppercase tracking-wide text-black transition-colors hover:bg-yellow-300"
+        >
+          Перейти в Telegram-бота
+        </a>
       </div>
     )
   }
