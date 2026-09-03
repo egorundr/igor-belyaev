@@ -188,7 +188,7 @@ export default function MasterPage() {
       <section className="grid grid-cols-1 border-t border-zinc-800 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="relative min-h-[380px] overflow-hidden border-b border-zinc-800 bg-zinc-950 lg:border-b-0 lg:border-r">
           <Image
-            src="/expert-mk.jpg"
+            src="/expert-profile.jpg"
             alt="Портрет эксперта Игоря Беляева"
             fill
             sizes="(max-width: 1024px) 100vw, 45vw"

@@ -90,7 +90,6 @@ export function CaptureForm() {
               className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-[0.08em] text-zinc-400"
             >
               {field.label}
-              {!field.required && <span className="ml-1 font-medium text-zinc-600">(необязательно)</span>}
             </label>
             <input
               id={field.id}
