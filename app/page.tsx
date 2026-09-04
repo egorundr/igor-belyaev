@@ -2,10 +2,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { CaptureForm } from "@/components/capture-form"
 
-const outcomes = [
-  { n: "01", title: "Читать позицию оппонента", text: "Формулировка уточняется после согласования содержания." },
-  { n: "02", title: "Держать рамку в диалоге", text: "Формулировка уточняется после согласования содержания." },
-  { n: "03", title: "Закрывать сделку на своих условиях", text: "Формулировка уточняется после согласования содержания." },
+const points = [
+  "как гендер влияет на жёсткость, риск и реакцию собеседника;",
+  "почему одинаковое поведение мужчины и женщины может восприниматься по-разному;",
+  "как стереотипы и стресс меняют ход переговоров;",
+  "как удерживать позицию, границы и возвращать разговор к фактам.",
 ]
 
 export default function Page() {
@@ -27,65 +28,56 @@ export default function Page() {
         </nav>
       </header>
 
-      {/* Hero */}
-      <section className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Left: headline + photo */}
-        <div className="relative flex flex-col justify-between gap-8 border-b border-zinc-800 px-5 py-10 md:px-10 md:py-14 lg:border-b-0 lg:border-r">
-          <div>
-            <p className="text-[11px] font-black uppercase tracking-[0.2em] text-yellow-400">
-              Бесплатный гайд
-            </p>
-            <h1 className="mt-5 text-balance text-[clamp(2.25rem,7vw,5rem)] font-black uppercase leading-[0.92] tracking-[-0.03em]">
-              Гендерные
-              <br />
-              переговоры
-              <br />
-              <span className="text-yellow-400">«Пол имеет значение»</span>
-            </h1>
-            <p className="mt-6 max-w-[44ch] text-pretty text-lg leading-relaxed text-zinc-400">
-              Короткая шпаргалка перед важным разговором: как учитывать гендерную динамику и вести
-              переговоры на своих условиях.
-            </p>
-          </div>
-
-          <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
-            <Image
-              src="/expert.jpg"
-              alt="Игорь Беляев — эксперт по переговорам"
-              width={900}
-              height={1200}
-              priority
-              className="h-full max-h-[420px] w-full object-cover object-top grayscale"
-            />
-            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between bg-gradient-to-t from-black/80 to-transparent p-5">
-              <div>
-                <p className="text-sm font-black uppercase tracking-wide">Игорь Беляев</p>
-                <p className="text-xs text-zinc-400">Эксперт по переговорам</p>
-              </div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-yellow-400">2025</span>
-            </div>
-          </div>
+      {/* Hero: headline (left) + photo (right on desktop) */}
+      <section className="grid grid-cols-1 items-center gap-8 px-5 py-10 md:px-10 md:py-14 lg:grid-cols-[1fr_0.85fr] lg:gap-12">
+        <div>
+          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-yellow-400">Бесплатный гайд</p>
+          <h1 className="mt-5 text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">
+            Бесплатный гайд по переговорам:
+            <br />
+            <span className="text-yellow-400">«Пол имеет значение»</span>
+          </h1>
+          <p className="mt-6 max-w-[46ch] text-pretty text-lg leading-relaxed text-zinc-400">
+            Короткая шпаргалка перед важным разговором: как учитывать гендерную динамику и вести переговоры на своих
+            условиях.
+          </p>
         </div>
 
-        {/* Right: form */}
-        <div className="flex items-center px-5 py-10 md:px-10 md:py-14">
-          <CaptureForm />
+        <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+          <Image
+            src="/expert.jpg"
+            alt="Игорь Беляев — эксперт по переговорам"
+            width={900}
+            height={1200}
+            priority
+            className="h-full max-h-[460px] w-full object-cover object-top grayscale"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/70 to-transparent p-5">
+            <p className="text-base font-black uppercase tracking-wide text-white">Игорь Беляев</p>
+            <p className="text-sm font-semibold text-zinc-200">Эксперт по переговорам</p>
+          </div>
         </div>
       </section>
 
-      {/* Outcomes */}
+      {/* Content: what's inside the guide */}
       <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <p className="text-[11px] font-black uppercase tracking-[0.2em] text-yellow-400">
-          После прочтения гайда вы получите
-        </p>
-        <div className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 md:grid-cols-3">
-          {outcomes.map((o) => (
-            <div key={o.n} className="flex flex-col gap-3 bg-black p-6 md:p-8">
-              <span className="text-sm font-black text-yellow-400">[{o.n}]</span>
-              <strong className="text-xl font-bold leading-snug">{o.title}</strong>
-              <p className="text-sm leading-relaxed text-zinc-400">{o.text}</p>
-            </div>
+        <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
+          В гайде я <span className="text-yellow-400">рассказал</span>
+        </h2>
+        <ul className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 md:grid-cols-2">
+          {points.map((p, i) => (
+            <li key={i} className="flex gap-4 bg-black p-6 md:p-8">
+              <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
+              <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
+            </li>
           ))}
+        </ul>
+      </section>
+
+      {/* Form: get the guide */}
+      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
+        <div className="mx-auto max-w-xl">
+          <CaptureForm />
         </div>
       </section>
 
