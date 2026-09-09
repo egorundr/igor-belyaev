@@ -31,8 +31,7 @@ export default function Page() {
       {/* Hero: headline (left) + photo (right on desktop) */}
       <section className="grid grid-cols-1 items-center gap-8 px-5 py-10 md:px-10 md:py-14 lg:grid-cols-[1fr_0.85fr] lg:gap-12">
         <div>
-          <p className="text-[11px] font-black uppercase tracking-[0.2em] text-yellow-400">Бесплатный гайд</p>
-          <h1 className="mt-5 text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">
+          <h1 className="text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.95] tracking-[-0.03em]">
             Бесплатный гайд по переговорам:
             <br />
             <span className="text-yellow-400">«Пол имеет значение»</span>
@@ -41,6 +40,12 @@ export default function Page() {
             Короткая шпаргалка перед важным разговором: как учитывать гендерную динамику и вести переговоры на своих
             условиях.
           </p>
+          <a
+            href="#zayavka"
+            className="mt-8 inline-flex rounded-full bg-yellow-400 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-black transition-colors hover:bg-yellow-300"
+          >
+            Забрать гайд
+          </a>
         </div>
 
         <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
@@ -59,25 +64,27 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Content: what's inside the guide */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
-          В гайде я <span className="text-yellow-400">рассказал</span>
-        </h2>
-        <ul className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 md:grid-cols-2">
-          {points.map((p, i) => (
-            <li key={i} className="flex gap-4 bg-black p-6 md:p-8">
-              <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
-              <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Form: get the guide */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <div className="mx-auto max-w-xl">
+      {/* Split screen: form (left) + what's inside the guide (right) */}
+      <section
+        id="zayavka"
+        className="grid scroll-mt-6 grid-cols-1 gap-8 border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
+      >
+        <div>
           <CaptureForm />
+        </div>
+
+        <div>
+          <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
+            В гайде я <span className="text-yellow-400">рассказал</span>
+          </h2>
+          <ul className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800">
+            {points.map((p, i) => (
+              <li key={i} className="flex gap-4 bg-black p-6 md:p-8">
+                <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
+                <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
