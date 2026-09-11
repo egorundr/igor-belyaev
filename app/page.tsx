@@ -67,15 +67,15 @@ export default function Page() {
       {/* Split screen: form (left) + what's inside the guide (right) */}
       <section
         id="zayavka"
-        className="grid scroll-mt-6 grid-cols-1 items-start gap-8 border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
+        className="grid scroll-mt-6 grid-cols-1 items-stretch gap-8 border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
       >
-        <div>
+        <div className="flex h-full flex-col">
           <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
             В гайде я <span className="text-yellow-400">рассказал</span>
           </h2>
-          <ul className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800">
+          <ul className="mt-8 grid flex-1 grid-cols-1 content-stretch gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800">
             {points.map((p, i) => (
-              <li key={i} className="flex gap-4 bg-black p-6 md:p-8">
+              <li key={i} className="flex items-center gap-4 bg-black p-6 md:p-8">
                 <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
                 <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
               </li>
@@ -83,7 +83,7 @@ export default function Page() {
           </ul>
         </div>
 
-        <div>
+        <div className="h-full [&>*]:h-full">
           <CaptureForm />
         </div>
       </section>
