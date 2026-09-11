@@ -70,10 +70,6 @@ export default function Page() {
         className="grid scroll-mt-6 grid-cols-1 gap-8 border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
       >
         <div>
-          <CaptureForm />
-        </div>
-
-        <div>
           <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
             В гайде я <span className="text-yellow-400">рассказал</span>
           </h2>
@@ -85,6 +81,10 @@ export default function Page() {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div>
+          <CaptureForm />
         </div>
       </section>
 
