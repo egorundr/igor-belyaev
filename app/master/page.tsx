@@ -100,8 +100,7 @@ export default function MasterPage() {
         {/* Left: headline + meta */}
         <div className="flex flex-col justify-between gap-10 border-b border-zinc-800 px-5 py-10 md:px-10 md:py-14 lg:border-b-0 lg:border-r">
           <div>
-            <p className={kicker}>Платный онлайн мастер-класс</p>
-            <h1 className="mt-5 text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.92] tracking-[-0.03em]">
+            <h1 className="text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.92] tracking-[-0.03em]">
               Уступить нельзя <span className="text-yellow-400">договориться</span>
             </h1>
             <p className="mt-5 text-2xl font-bold text-zinc-300">Куда вы поставите запятую?</p>
@@ -132,7 +131,7 @@ export default function MasterPage() {
           <div className="relative w-full overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
             <Image
               src="/expert-mk.jpg"
-              alt="Игорь Беляев — эксперт по переговорам"
+              alt="Игорь Беляев — эксп��рт по переговорам"
               width={1200}
               height={800}
               priority
