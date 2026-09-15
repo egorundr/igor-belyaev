@@ -151,7 +151,7 @@ export default function MasterPage() {
       {/* Для кого */}
       <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
         <h2 className={sectionTitle}>Для кого</h2>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
           {audience.map((item) => (
             <div key={item.title} className="flex flex-col gap-3 bg-black p-6 md:p-8">
               <strong className={cardTitle}>{item.title}</strong>
