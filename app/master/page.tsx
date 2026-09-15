@@ -142,7 +142,6 @@ export default function MasterPage() {
                 <p className="text-sm font-black uppercase tracking-wide">Игорь Беляев</p>
                 <p className="text-xs text-zinc-400">Эксперт по переговорам</p>
               </div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-yellow-400">MASTERCLASS</span>
             </div>
           </div>
         </div>
