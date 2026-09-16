@@ -1,10 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
+import { Check } from "lucide-react"
 
 const meta = [
   { label: "Дата", value: "6 октября" },
-  { label: "Формат", value: "Онлайн" },
-  { label: "Стоимость", value: "Уточняется" },
+  { label: "Формат", value: "Онлайн-мастер-класс в Zoom с практикой" },
+  { label: "Стоимость", value: "2 990 ₽" },
 ]
 
 const audience = [
@@ -18,7 +19,7 @@ const audience = [
   },
   {
     title: "Люди, принимающие значимые финансовые и личные решения",
-    text: "Для тех, кому приходится договариваться о деньгах, имуществе, обязательствах, условиях и ответственности в важных для себя ситуациях.",
+    text: "Для тех, кому приходится договариваться о деньгах, имуществе, обязательствах, условиях\nи ответственности в важных для себя ситуациях.",
   },
   {
     title: "Те, кто сталкивается с непростыми личными переговорами",
@@ -26,26 +27,21 @@ const audience = [
   },
 ]
 
-const results = [
-  "как заранее оценивать свою переговорную позицию;",
-  "как усиливать свою позицию до начала разговора;",
-  "как обсуждать деньги и условия без лишних уступок;",
-  "как говорить «нет» и отстаивать свои интересы;",
-]
-
 const program = [
-  { title: "Сильная и слабая позиция", text: "Как определить свою сильную и слабую переговорную позицию до начала разговора." },
-  { title: "Деньги и условия", text: "Как обсуждать деньги, условия и ответственность." },
-  { title: "Давление собеседника", text: "Как вести переговоры с человеком, который давит или пытается навязать свои правила." },
-  { title: "Умение говорить «нет»", text: "Как говорить «нет» и сохранять свою позицию." },
+  "Как заранее определить свою сильную или слабую переговорную позицию и понять, что можно изменить ещё до начала разговора.",
+  "Как действовать, если собеседник давит, занимает жёсткую позицию или пытается навязать свои правила.",
+  "Как обсуждать деньги, условия и возможные уступки, сохраняя собственные интересы.",
+  "Как говорить «нет» и отстаивать свою позицию без лишней конфронтации.",
 ]
 
 const facts = [
-  { title: "Эксперт МГУ им. М.В. Ломоносова", note: "Экспертная деятельность" },
-  { title: "МГТУ им. Н.Э. Баумана", note: "Указано в материалах Игоря" },
-  { title: "Harvard Law School и Chicago Booth School of Business", note: "Указано в материалах Игоря" },
-  { title: "Northwestern University и Michigan State University", note: "Указано в материалах Игоря" },
-  { title: "СПбУТУиЭ", note: "Санкт-Петербург" },
+  { title: "Harvard Business School — Negotiation Mastery Certificate", note: "2024" },
+  { title: "Harvard Law School — Harvard Contract Law Certification", note: "2017" },
+  { title: "MIT School of Engineering — Entrepreneurial Negotiations Certification", note: "2018" },
+  { title: "Michigan State University — Successful Negotiation Certification", note: "2019" },
+  { title: "Northwestern University — High Performance Collaboration Certification", note: "2018" },
+  { title: "The University of Chicago Booth School of Business — Sales Strategies Certification", note: "2017" },
+  { title: "МГТУ им. Н. Э. Баумана — специалист-инженер приборов навигации и стабилизации", note: "2003–2010" },
 ]
 
 const cases = [
@@ -64,11 +60,11 @@ const cases = [
 ]
 
 const faq = [
-  "На какой площадке пройдет мастер-класс?",
-  "Будет ли доступна запись?",
-  "Можно ли будет задавать вопросы Игорю?",
-  "Будут ли разборы ситуаций участников?",
-  "На какой срок будет доступна запись?",
+  { q: "На какой площадке пройдёт мастер-класс?", a: "Zoom." },
+  { q: "Будет ли доступна запись?", a: "Уточняется." },
+  { q: "Можно ли будет задавать вопросы Игорю?", a: "Уточняется." },
+  { q: "Будут ли разборы ситуаций участников?", a: "Уточняется." },
+  { q: "На какой срок будет доступна запись?", a: "Уточняется." },
 ]
 
 const sectionTitle =
@@ -106,7 +102,8 @@ export default function MasterPage() {
             <p className="mt-5 text-2xl font-bold text-zinc-300">Куда вы поставите запятую?</p>
             <p className="mt-6 max-w-[46ch] text-pretty text-lg leading-relaxed text-zinc-400">
               Как сохранять сильную позицию в переговорах, обсуждать деньги и условия, выдерживать
-              давление и приходить к конкретным договорённостям.
+              давление{" "}
+              <br />и приходить к конкретным договорённостям.
             </p>
             <a
               href="#participation"
@@ -118,9 +115,9 @@ export default function MasterPage() {
 
           <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-3">
             {meta.map((item) => (
-              <div key={item.label} className="bg-black p-5">
-                <span className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">{item.label}</span>
-                <strong className="mt-1.5 block text-lg font-bold">{item.value}</strong>
+              <div key={item.label} className="flex flex-col items-center justify-start bg-black p-7 text-center">
+                <span className="text-xs uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
+                <strong className="mt-2 block text-balance text-xl font-black leading-tight">{item.value}</strong>
               </div>
             ))}
           </div>
@@ -131,18 +128,12 @@ export default function MasterPage() {
           <div className="relative w-full overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
             <Image
               src="/expert-mk.jpg"
-              alt="Игорь Беляев — эксп��рт по переговорам"
+              alt="Игорь Беляев — эксперт по переговорам"
               width={1200}
               height={800}
               priority
-              className="h-full max-h-[460px] w-full object-cover object-top grayscale"
+              className="h-full max-h-[460px] w-full object-cover object-center grayscale"
             />
-            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between bg-gradient-to-t from-black/80 to-transparent p-5">
-              <div>
-                <p className="text-sm font-black uppercase tracking-wide">Игорь Беляев</p>
-                <p className="text-xs text-zinc-400">Эксперт по переговорам</p>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -154,21 +145,7 @@ export default function MasterPage() {
           {audience.map((item) => (
             <div key={item.title} className="flex flex-col gap-3 bg-black p-6 md:p-8">
               <strong className={cardTitle}>{item.title}</strong>
-              <p className="text-sm leading-relaxed text-zinc-400">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Результаты */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <p className={kicker}>Что вы получите</p>
-        <h2 className={`mt-3 ${sectionTitle}`}>После мастер-класса вы поймёте</h2>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
-          {results.map((item) => (
-            <div key={item} className="flex items-start gap-4 bg-black p-6 md:p-8">
-              <span className="mt-2.5 h-2 w-2 shrink-0 rounded-full bg-yellow-400" />
-              <p className="text-lg leading-relaxed text-zinc-200">{item}</p>
+              <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-400">{item.text}</p>
             </div>
           ))}
         </div>
@@ -176,12 +153,14 @@ export default function MasterPage() {
 
       {/* Программа */}
       <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <h2 className={sectionTitle}>Что разберём</h2>
+        <h2 className={sectionTitle}>На мастер-классе мы разберём</h2>
         <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
           {program.map((item) => (
-            <div key={item.title} className="flex flex-col gap-3 bg-black p-6 md:p-8">
-              <strong className={cardTitle}>{item.title}</strong>
-              <p className="text-sm leading-relaxed text-zinc-400">{item.text}</p>
+            <div key={item} className="flex items-start gap-4 bg-black p-6 md:p-8">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-black">
+                <Check className="h-4 w-4" strokeWidth={3} />
+              </span>
+              <p className="text-lg leading-relaxed text-zinc-200">{item}</p>
             </div>
           ))}
         </div>
@@ -200,12 +179,21 @@ export default function MasterPage() {
         </div>
         <div className="flex flex-col justify-between gap-8 px-5 py-10 md:px-10 md:py-14">
           <div>
-            <p className={kicker}>Об эксперте</p>
-            <h2 className="mt-3 text-[clamp(2.25rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+            <h2 className="text-[clamp(2.25rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
               Игорь Беляев
             </h2>
-            <p className="mt-5 max-w-[46ch] text-lg leading-relaxed text-zinc-400">
-              Эксперт по переговорам, влиянию и управлению сложными коммуникациями.
+            <p className="mt-4 max-w-[46ch] text-xl font-bold leading-snug text-white">
+              Ведущий эксперт по сложным управленческим переговорам
+            </p>
+            <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-zinc-400">
+              Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами
+              крупных корпораций, финансовых институтов и государственных организаций.
+              Специализируется на сложных переговорах, переговорах под давлением, управленческом
+              влиянии и работе с конфликтами интересов.
+            </p>
+            <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-zinc-400">
+              Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна,
+              Северстали, Правительства Москвы и других крупных организаций.
             </p>
           </div>
           <div>
@@ -237,18 +225,17 @@ export default function MasterPage() {
       <section id="participation" className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
         <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.2fr_0.8fr]">
           <div>
-            <p className={kicker}>Участие</p>
-            <h2 className={`mt-3 ${sectionTitle}`}>Стоимость и формат</h2>
+            <h2 className={sectionTitle}>
+              Стоимость <br />и формат
+            </h2>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
-              Дата: 6 октября (согласовать). Формат: онлайн, с ответами на вопросы. Время,
-              длительность, наличие записи и стоимость уточняются.
+              Дата: 6 октября. Формат: онлайн-мастер-класс в Zoom с практикой. Стоимость: 2 990 ₽.
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8">
             <div className="text-[clamp(3rem,8vw,5.5rem)] font-black leading-[0.9] tracking-tight text-yellow-400">
-              ₽ —
+              2 990 ₽
             </div>
-            <p className="mt-2 text-sm text-zinc-400">Точная стоимость уточняется.</p>
             <button
               type="button"
               className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-yellow-400 px-5 font-bold text-black transition-opacity hover:opacity-90"
@@ -263,15 +250,15 @@ export default function MasterPage() {
       <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
         <h2 className={`mb-6 ${sectionTitle}`}>Вопросы</h2>
         <div>
-          {faq.map((question) => (
-            <details key={question} className="group border-t border-zinc-800 py-5 last:border-b">
+          {faq.map((item) => (
+            <details key={item.q} className="group border-t border-zinc-800 py-5 last:border-b">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
-                <span>{question}</span>
+                <span>{item.q}</span>
                 <span className="text-2xl leading-none text-yellow-400 transition-transform group-open:rotate-45">
                   +
                 </span>
               </summary>
-              <p className="mt-3 leading-relaxed text-zinc-400">Уточняется.</p>
+              <p className="mt-3 leading-relaxed text-zinc-400">{item.a}</p>
             </details>
           ))}
         </div>
