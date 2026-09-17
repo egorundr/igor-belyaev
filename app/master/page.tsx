@@ -197,7 +197,7 @@ export default function MasterPage() {
               организаций.
             </p>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
             {facts.map((fact) => (
               <div key={fact.title} className="flex flex-col gap-1 bg-black p-4">
                 <strong className="text-pretty text-sm font-bold leading-snug">{fact.title}</strong>
