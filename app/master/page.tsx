@@ -4,7 +4,8 @@ import { Check } from "lucide-react"
 
 const meta = [
   { label: "Дата", value: "6 октября" },
-  { label: "Формат", value: "Онлайн-мастер-класс в Zoom с практикой" },
+  { label: "Формат", value: "Онлайн, Zoom с практикой" },
+  { label: "Длительность", value: "2 часа" },
   { label: "Стоимость", value: "2 990 ₽" },
 ]
 
@@ -61,10 +62,12 @@ const cases = [
 
 const faq = [
   { q: "На какой площадке пройдёт мастер-класс?", a: "Zoom." },
-  { q: "Будет ли доступна запись?", a: "Уточняется." },
+  {
+    q: "Будет ли доступна запись?",
+    a: "Да, запись мастер-класса мы вышлем всем участникам после его проведения.",
+  },
   { q: "Можно ли будет задавать вопросы Игорю?", a: "Уточняется." },
   { q: "Будут ли разборы ситуаций участников?", a: "Уточняется." },
-  { q: "На какой срок будет доступна запись?", a: "Уточняется." },
 ]
 
 const sectionTitle =
@@ -113,26 +116,26 @@ export default function MasterPage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 lg:grid-cols-4">
             {meta.map((item) => (
-              <div key={item.label} className="flex flex-col items-center justify-start bg-black p-7 text-center">
+              <div key={item.label} className="flex flex-col items-center justify-start bg-black p-6 text-center">
                 <span className="text-xs uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
-                <strong className="mt-2 block text-balance text-xl font-black leading-tight">{item.value}</strong>
+                <strong className="mt-2 block text-balance text-lg font-black leading-tight">{item.value}</strong>
               </div>
             ))}
           </div>
         </div>
 
         {/* Right: photo */}
-        <div className="relative flex items-center px-5 py-10 md:px-10 md:py-14">
-          <div className="relative w-full overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+        <div className="relative flex items-center px-5 pb-10 md:px-10 md:py-14 lg:p-0">
+          <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl border border-zinc-800 bg-white lg:rounded-none lg:border-0 lg:border-l">
             <Image
-              src="/expert-mk.jpg"
+              src="/expert-mk-hero.jpg"
               alt="Игорь Беляев — эксперт по переговорам"
-              width={1200}
-              height={800}
+              fill
               priority
-              className="h-full max-h-[460px] w-full object-cover object-center grayscale"
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="object-cover object-top"
             />
           </div>
         </div>
@@ -167,39 +170,37 @@ export default function MasterPage() {
       </section>
 
       {/* Об эксперте */}
-      <section className="grid grid-cols-1 border-t border-zinc-800 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="relative min-h-[380px] overflow-hidden border-b border-zinc-800 bg-zinc-950 lg:border-b-0 lg:border-r">
+      <section className="grid grid-cols-1 border-t border-zinc-800 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="relative min-h-[320px] overflow-hidden border-b border-zinc-800 bg-zinc-950 lg:min-h-full lg:border-b-0 lg:border-r">
           <Image
             src="/expert-profile.jpg"
             alt="Портрет эксперта Игоря Беляева"
             fill
-            sizes="(max-width: 1024px) 100vw, 45vw"
+            sizes="(max-width: 1024px) 100vw, 36vw"
             className="object-cover object-top grayscale"
           />
         </div>
-        <div className="flex flex-col justify-between gap-8 px-5 py-10 md:px-10 md:py-14">
+        <div className="flex flex-col gap-6 px-5 py-10 md:px-10 md:py-12">
           <div>
-            <h2 className="text-[clamp(2.25rem,5vw,4rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
               Игорь Беляев
             </h2>
-            <p className="mt-4 max-w-[46ch] text-xl font-bold leading-snug text-white">
+            <p className="mt-3 max-w-[46ch] text-lg font-bold leading-snug text-white">
               Ведущий эксперт по сложным управленческим переговорам
             </p>
-            <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-zinc-400">
+            <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-zinc-400">
               Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами
               крупных корпораций, финансовых институтов и государственных организаций.
               Специализируется на сложных переговорах, переговорах под давлением, управленческом
-              влиянии и работе с конфликтами интересов.
-            </p>
-            <p className="mt-4 max-w-[52ch] text-base leading-relaxed text-zinc-400">
-              Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна,
-              Северстали, Правительства Москвы и других крупных организаций.
+              влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы
+              для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других
+              организаций.
             </p>
           </div>
-          <div>
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
             {facts.map((fact) => (
-              <div key={fact.title} className="grid gap-1.5 border-t border-zinc-800 py-4 last:border-b">
-                <strong className="text-pretty text-[17px] font-bold leading-snug">{fact.title}</strong>
+              <div key={fact.title} className="flex flex-col gap-1 bg-black p-4">
+                <strong className="text-pretty text-sm font-bold leading-snug">{fact.title}</strong>
                 <span className="text-xs text-zinc-500">{fact.note}</span>
               </div>
             ))}
@@ -229,7 +230,12 @@ export default function MasterPage() {
               Стоимость <br />и формат
             </h2>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
-              Дата: 6 октября. Формат: онлайн-мастер-класс в Zoom с практикой. Стоимость: 2 990 ₽.
+              Дата: 6 октября. Формат: онлайн в Zoom с практикой, длительность — 2 часа.
+              Стоимость: 2 990 ₽.
+            </p>
+            <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
+              Мастер-класс проходит в формате бизнес-игры с отдельными комнатами для участников:
+              каждый сможет включиться в практику и получить личное взаимодействие.
             </p>
           </div>
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8">
@@ -265,9 +271,28 @@ export default function MasterPage() {
       </section>
 
       {/* Footer */}
-      <footer className="flex flex-col gap-2 border-t border-zinc-800 px-5 py-8 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10">
-        <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Игорь Беляев</span>
-        <span>© {new Date().getFullYear()} Все права защищены</span>
+      <footer className="border-t border-zinc-800 px-5 py-8 text-xs text-zinc-500 md:px-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-1">
+            <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Игорь Беляев</span>
+            <span>Чалунин Максим Александрович</span>
+            <span>ИНН 668601656614</span>
+          </div>
+          <nav className="flex flex-col gap-2 md:items-end">
+            <Link href="/privacy" className="transition-colors hover:text-yellow-400">
+              Политика конфиденциальности
+            </Link>
+            <Link href="/consent" className="transition-colors hover:text-yellow-400">
+              Согласие на обработку персональных данных
+            </Link>
+            <Link href="/offer" className="transition-colors hover:text-yellow-400">
+              Оферта
+            </Link>
+          </nav>
+        </div>
+        <div className="mt-6 border-t border-zinc-800 pt-6">
+          © {new Date().getFullYear()} Все права защищены
+        </div>
       </footer>
     </main>
   )
