@@ -164,15 +164,14 @@ export default function MasterPage() {
         <h2 className={sectionTitle}>Для кого</h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {audience.map((item) => (
-            <div key={item.title} className="flex flex-col overflow-hidden rounded-2xl bg-zinc-950">
-              <div className="w-full bg-zinc-950">
+            <div key={item.title} className="flex flex-col overflow-hidden bg-zinc-950">
+              <div className="relative h-72 w-full bg-zinc-950 md:h-80">
                 <Image
                   src={item.img || "/placeholder.svg"}
                   alt={item.title}
-                  width={960}
-                  height={1280}
+                  fill
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="h-auto w-full"
+                  className="object-cover object-top"
                 />
               </div>
               <div className="flex flex-col gap-3 p-6 md:p-8">
