@@ -171,7 +171,7 @@ export default function MasterPage() {
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover object-top"
+                  className="object-contain"
                 />
               </div>
               <div className="flex flex-col gap-3 p-6 md:p-8">
