@@ -165,13 +165,14 @@ export default function MasterPage() {
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {audience.map((item) => (
             <div key={item.title} className="flex flex-col overflow-hidden rounded-2xl bg-zinc-950">
-              <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-950">
+              <div className="w-full bg-zinc-950">
                 <Image
                   src={item.img || "/placeholder.svg"}
                   alt={item.title}
-                  fill
+                  width={960}
+                  height={1280}
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-contain"
+                  className="h-auto w-full"
                 />
               </div>
               <div className="flex flex-col gap-3 p-6 md:p-8">
@@ -219,7 +220,7 @@ export default function MasterPage() {
             </p>
             <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-zinc-400">
               Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами
-              крупных корпораций, финансовых институтов и государственных организаций.
+              крупных корпораций, финансовых институтов и государственных орган��заций.
               Специализируется на сложных переговорах, переговорах под давлением, управленческом
               влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы
               для команд ВТБ, Яндекса, Билайна, Сев��рстали, Правительства Москвы и других
