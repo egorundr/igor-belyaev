@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Check } from "lucide-react"
+import { Users, Gauge, Banknote, Ban } from "lucide-react"
 
 const meta = [
   { label: "Дата", value: "6 октября" },
@@ -13,26 +13,42 @@ const audience = [
   {
     title: "Предприниматели и руководители",
     text: "Для тех, кто регулярно обсуждает деньги, ответственность, условия сотрудничества и принимает решения в ситуациях, где интересы сторон не совпадают.",
+    img: "/audience/entrepreneurs.jpg",
   },
   {
     title: "Эксперты и специалисты",
     text: "Для тех, кому важно уверенно говорить о цене, условиях работы, своих интересах и границах.",
+    img: "/audience/experts.jpg",
   },
   {
     title: "Люди, принимающие значимые финансовые и личные решения",
     text: "Для тех, кому приходится договариваться о деньгах, имуществе, обязательствах, условиях\nи ответственности в важных для себя ситуациях.",
+    img: "/audience/decisions.jpg",
   },
   {
     title: "Те, кто сталкивается с непростыми личными переговорами",
     text: "Для ситуаций, связанных с близкими, бывшим супругом, совместными решениями, деньгами, обязанностями и ответственностью.",
+    img: "/audience/personal.jpg",
   },
 ]
 
 const program = [
-  "Как заранее определить свою сильную или слабую переговорную позицию и понять, что можно изменить ещё до начала разговора.",
-  "Как действовать, если собеседник давит, занимает жёсткую позицию или пытается навязать свои правила.",
-  "Как обсуждать деньги, условия и возможные уступки, сохраняя собственные интересы.",
-  "Как говорить «нет» и отстаивать свою позицию без лишней конфронтации.",
+  {
+    icon: Users,
+    text: "Как заранее определить свою сильную или слабую переговорную позицию и понять, что можно изменить ещё до начала разговора.",
+  },
+  {
+    icon: Gauge,
+    text: "Как действовать, если собеседник давит, занимает жёсткую позицию или пытается навязать свои правила.",
+  },
+  {
+    icon: Banknote,
+    text: "Как обсуждать деньги, условия и возможные уступки, сохраняя собственные интересы.",
+  },
+  {
+    icon: Ban,
+    text: "Как говорить «нет» и отстаивать свою позицию без лишней конфронтации.",
+  },
 ]
 
 const facts = [
@@ -66,8 +82,10 @@ const faq = [
     q: "Будет ли доступна запись?",
     a: "Да, запись мастер-класса мы вышлем всем участникам после его проведения.",
   },
-  { q: "Можно ли будет задавать вопросы Игорю?", a: "Уточняется." },
-  { q: "Будут ли разборы ситуаций участников?", a: "Уточняется." },
+  {
+    q: "Можно ли будет задавать вопросы Игорю?",
+    a: "Да. В конце мастер-класса будет отдельный блок ответов на вопросы участников продолжительностью до 30 минут.",
+  },
 ]
 
 const sectionTitle =
@@ -79,7 +97,7 @@ export default function MasterPage() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
       {/* Top bar */}
-      <header className="flex items-center justify-between border-b border-zinc-800 px-5 py-4 md:px-10">
+      <header className="flex items-center justify-between px-5 py-4 md:px-10">
         <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
         <nav className="flex items-center gap-2">
           <Link
@@ -97,7 +115,7 @@ export default function MasterPage() {
       {/* Hero */}
       <section className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
         {/* Left: headline + meta */}
-        <div className="flex flex-col justify-between gap-10 border-b border-zinc-800 px-5 py-10 md:px-10 md:py-14 lg:border-b-0 lg:border-r">
+        <div className="flex flex-col justify-between gap-10 px-5 py-10 md:px-10 md:py-14">
           <div>
             <h1 className="text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.92] tracking-[-0.03em]">
               Уступить нельзя <span className="text-yellow-400">договориться</span>
@@ -116,9 +134,9 @@ export default function MasterPage() {
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {meta.map((item) => (
-              <div key={item.label} className="flex flex-col items-center justify-start bg-black p-6 text-center">
+              <div key={item.label} className="flex flex-col items-center justify-start rounded-2xl bg-zinc-950 p-6 text-center">
                 <span className="text-xs uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
                 <strong className="mt-2 block text-balance text-lg font-black leading-tight">{item.value}</strong>
               </div>
@@ -128,7 +146,7 @@ export default function MasterPage() {
 
         {/* Right: photo */}
         <div className="relative flex items-center px-5 pb-10 md:px-10 md:py-14 lg:p-0">
-          <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl border border-zinc-800 bg-white lg:rounded-none lg:border-0 lg:border-l">
+          <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl bg-white lg:rounded-none">
             <Image
               src="/expert-mk-hero.jpg"
               alt="Игорь Беляев — эксперт по переговорам"
@@ -142,36 +160,47 @@ export default function MasterPage() {
       </section>
 
       {/* Для кого */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
+      <section className="px-5 py-12 md:px-10 md:py-16">
         <h2 className={sectionTitle}>Для кого</h2>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {audience.map((item) => (
-            <div key={item.title} className="flex flex-col gap-3 bg-black p-6 md:p-8">
-              <strong className={cardTitle}>{item.title}</strong>
-              <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-400">{item.text}</p>
+            <div key={item.title} className="flex flex-col overflow-hidden rounded-2xl bg-zinc-950">
+              <div className="relative aspect-[16/9] w-full overflow-hidden">
+                <Image
+                  src={item.img || "/placeholder.svg"}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="flex flex-col gap-3 p-6 md:p-8">
+                <strong className={cardTitle}>{item.title}</strong>
+                <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-400">{item.text}</p>
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Программа */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
+      <section className="px-5 py-12 md:px-10 md:py-16">
         <h2 className={sectionTitle}>На мастер-классе мы разберём</h2>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {program.map((item) => (
-            <div key={item} className="flex items-start gap-4 bg-black p-6 md:p-8">
-              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-black">
-                <Check className="h-4 w-4" strokeWidth={3} />
+            <div key={item.text} className="flex items-start gap-4 rounded-2xl bg-zinc-950 p-6 md:p-8">
+              <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-black">
+                <item.icon className="h-5 w-5" strokeWidth={2.5} />
               </span>
-              <p className="text-lg leading-relaxed text-zinc-200">{item}</p>
+              <p className="text-lg leading-relaxed text-zinc-200">{item.text}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Об эксперте */}
-      <section className="grid grid-cols-1 border-t border-zinc-800 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="relative min-h-[320px] overflow-hidden border-b border-zinc-800 bg-zinc-950 lg:min-h-full lg:border-b-0 lg:border-r">
+      <section className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="relative min-h-[320px] overflow-hidden bg-zinc-950 lg:min-h-full">
           <Image
             src="/expert-profile.jpg"
             alt="Портрет эксперта Игоря Беляева"
@@ -193,13 +222,13 @@ export default function MasterPage() {
               крупных корпораций, финансовых институтов и государственных организаций.
               Специализируется на сложных переговорах, переговорах под давлением, управленческом
               влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы
-              для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других
+              для команд ВТБ, Яндекса, Билайна, Сев��рстали, Правительства Москвы и других
               организаций.
             </p>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
+          <div className="grid gap-3 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
             {facts.map((fact) => (
-              <div key={fact.title} className="flex flex-col gap-1 bg-black p-4">
+              <div key={fact.title} className="flex flex-col gap-1 rounded-xl bg-zinc-950 p-4">
                 <strong className="text-pretty text-sm font-bold leading-snug">{fact.title}</strong>
                 <span className="text-xs text-zinc-500">{fact.note}</span>
               </div>
@@ -274,7 +303,7 @@ export default function MasterPage() {
       <footer className="border-t border-zinc-800 px-5 py-8 text-xs text-zinc-500 md:px-10">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-1">
-            <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Игорь Беляев</span>
+            <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Контактное лицо</span>
             <span>Чалунин Максим Александрович</span>
             <span>ИНН 668601656614</span>
           </div>
