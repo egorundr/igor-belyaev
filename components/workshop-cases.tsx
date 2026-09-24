@@ -27,25 +27,27 @@ const cases = [
 export function WorkshopCases() {
   return (
     <section className="px-5 py-12 md:px-10 md:py-16">
-      <h2 className="text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
-        Для кого подходит
-      </h2>
-      <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-10">
-        <div className="relative min-h-[360px] overflow-hidden rounded-2xl bg-white sm:min-h-[480px] lg:min-h-full">
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <h2 className="text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
+          Для кого подходит
+        </h2>
+        <p className="max-w-[58ch] text-pretty leading-relaxed text-zinc-400 md:pb-2">
+          Мастер-класс подойдёт тем, кому важно обсуждать деньги и условия, сохранять свою позицию и договариваться в непростых ситуациях. Ниже — обезличенные примеры такой работы.
+        </p>
+      </div>
+      <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-950">
           <Image
             src="/workshop-negotiation.jpg"
             alt="Два участника в деловой одежде готовятся к переговорам"
             fill
-            sizes="(max-width: 1024px) 100vw, 40vw"
-            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 42vw"
+            className="object-cover object-top"
           />
         </div>
         <div className="flex flex-col gap-3">
-          <p className="mb-2 max-w-[58ch] text-pretty leading-relaxed text-zinc-400">
-            Мастер-класс подойдёт тем, кому важно обсуждать деньги и условия, сохранять свою позицию и договариваться в непростых ситуациях. Ниже — обезличенные примеры такой работы.
-          </p>
           {cases.map((item, index) => (
-            <details key={item.title} open={index === 0} className="group rounded-2xl bg-zinc-950 p-5 md:p-6">
+            <details key={item.title} className="group rounded-2xl border border-white/5 bg-zinc-950 p-5 transition-colors hover:border-yellow-400/30 md:p-6">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-4 [&::-webkit-details-marker]:hidden">
                 <span>
                   <span className="block text-xs font-black uppercase tracking-[0.16em] text-yellow-400">Кейс {index + 1}</span>
