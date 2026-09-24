@@ -70,12 +70,12 @@ export default function Page() {
         className="grid scroll-mt-6 grid-cols-1 items-stretch gap-8 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
       >
         <div className="flex h-full flex-col">
-          <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
+          <h2 className="text-balance text-[clamp(2rem,4vw,3rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
             В гайде я <span className="text-yellow-400">рассказал</span>
           </h2>
-          <ul className="mt-8 grid flex-1 grid-cols-1 content-stretch gap-3 overflow-hidden rounded-2xl">
+          <ul className="mt-6 grid flex-1 grid-cols-1 content-stretch gap-0 overflow-hidden rounded-2xl bg-zinc-950">
             {points.map((p, i) => (
-              <li key={i} className="flex items-center gap-4 rounded-2xl bg-zinc-950 p-6 md:p-8">
+              <li key={p} className="flex items-center gap-4 px-6 py-5 md:px-8 md:py-6">
                 <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
                 <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
               </li>
