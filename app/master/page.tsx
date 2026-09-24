@@ -1,38 +1,20 @@
-import Image from "next/image"
 import Link from "next/link"
-import { Users, Gauge, Banknote, Ban } from "lucide-react"
+import { Banknote, Ban, Gauge, Users } from "lucide-react"
+import { CaptureForm } from "@/components/capture-form"
+import { WorkshopCases } from "@/components/workshop-cases"
 
 const meta = [
   { label: "Дата", value: "6 октября" },
   { label: "Формат", value: "Онлайн, Zoom с практикой" },
   { label: "Длительность", value: "2 часа" },
-  { label: "Стоимость", value: "2 990 ₽" },
-]
-
-const audience = [
-  {
-    title: "Предприниматели и руководители",
-    text: "Для тех, кто регулярно обсуждает деньги, ответственность, условия сотрудничества и принимает решения в ситуациях, где интересы сторон не совпадают.",
-    img: "/audience/entrepreneurs.jpg",
-  },
-  {
-    title: "Эксперты и специалисты",
-    text: "Для тех, кому важно уверенно говорить о цене, условиях работы, своих интересах и границах.",
-    img: "/audience/experts.jpg",
-  },
-  {
-    title: "Люди, принимающие значимые финансовые и личные решения",
-    text: "Для тех, кому приходится договариваться о деньгах, имуществе, обязательствах, условиях\nи ответственности в важных для себя ситуациях.",
-    img: "/audience/decisions.jpg",
-  },
-  {
-    title: "Те, кто сталкивается с непростыми личными переговорами",
-    text: "Для ситуаций, связанных с близкими, бывшим супругом, совместными решениями, деньгами, обязанностями и ответственностью.",
-    img: "/audience/personal.jpg",
-  },
+  { label: "Стоимость", value: "9 990 ₽" },
 ]
 
 const program = [
+  {
+    icon: Banknote,
+    text: "Как обсуждать деньги, условия и возможные уступки, сохраняя собственные интересы.",
+  },
   {
     icon: Users,
     text: "Как заранее определить свою сильную или слабую переговорную позицию и понять, что можно изменить ещё до начала разговора.",
@@ -40,10 +22,6 @@ const program = [
   {
     icon: Gauge,
     text: "Как действовать, если собеседник давит, занимает жёсткую позицию или пытается навязать свои правила.",
-  },
-  {
-    icon: Banknote,
-    text: "Как обсуждать деньги, условия и возможные уступки, сохраняя собственные интересы.",
   },
   {
     icon: Ban,
@@ -61,23 +39,8 @@ const facts = [
   { title: "МГТУ им. Н. Э. Баумана — специалист-инженер приборов навигации и стабилизации", note: "2003–2010" },
 ]
 
-const cases = [
-  {
-    title: "Кейс 1",
-    text: "Точка А → работа с Игорем → точка Б. Данные будут добавлены после заполнения таблицы клиентских кейсов.",
-  },
-  {
-    title: "Кейс 2",
-    text: "Точка А → работа с Игорем → точка Б. Данные будут добавлены после заполнения таблицы клиентских кейсов.",
-  },
-  {
-    title: "Кейс 3",
-    text: "Точка А → работа с Игорем → точка Б. Данные будут добавлены после заполнения таблицы клиентских кейсов.",
-  },
-]
-
 const faq = [
-  { q: "На какой площадке пройдёт мастер-класс?", a: "Zoom." },
+  { q: "На какой площадке пройдёт мастер-класс?", a: "Мастер-класс пройдёт онлайн в Zoom." },
   {
     q: "Будет ли доступна запись?",
     a: "Да, запись мастер-класса мы вышлем всем участникам после его проведения.",
@@ -88,22 +51,15 @@ const faq = [
   },
 ]
 
-const sectionTitle =
-  "text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]"
-const kicker = "text-[11px] font-black uppercase tracking-[0.2em] text-yellow-400"
-const cardTitle = "text-xl font-bold leading-snug"
+const sectionTitle = "text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]"
 
 export default function MasterPage() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
-      {/* Top bar */}
       <header className="flex items-center justify-between px-5 py-4 md:px-10">
         <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
-        <nav className="flex items-center gap-2">
-          <Link
-            href="/"
-            className="rounded-full border border-zinc-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:border-yellow-400 hover:text-yellow-400"
-          >
+        <nav className="flex items-center gap-2" aria-label="Разделы сайта">
+          <Link href="/" className="rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:text-yellow-400">
             Гайд
           </Link>
           <span className="rounded-full bg-yellow-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-black">
@@ -112,9 +68,7 @@ export default function MasterPage() {
         </nav>
       </header>
 
-      {/* Hero */}
       <section className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Left: headline + meta */}
         <div className="flex flex-col justify-between gap-10 px-5 py-10 md:px-10 md:py-14">
           <div>
             <h1 className="text-balance text-[clamp(2rem,6vw,4.5rem)] font-black uppercase leading-[0.92] tracking-[-0.03em]">
@@ -122,21 +76,16 @@ export default function MasterPage() {
             </h1>
             <p className="mt-5 text-2xl font-bold text-zinc-300">Куда вы поставите запятую?</p>
             <p className="mt-6 max-w-[46ch] text-pretty text-lg leading-relaxed text-zinc-400">
-              Как сохранять сильную позицию в переговорах, обсуждать деньги и условия, выдерживать
-              давление{" "}
-              <br />и приходить к конкретным договорённостям.
+              Как сохранять сильную позицию в переговорах, обсуждать деньги и условия, выдерживать давление и приходить к конкретным договорённостям.
             </p>
-            <a
-              href="#participation"
-              className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-yellow-400 px-7 font-bold text-black transition-opacity hover:opacity-90"
-            >
-              Оплатить участие
+            <a href="#participation" className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-yellow-400 px-7 font-bold text-black transition-opacity hover:opacity-90">
+              Оставить заявку
             </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {meta.map((item) => (
-              <div key={item.label} className="flex flex-col items-center justify-start rounded-2xl bg-zinc-950 p-6 text-center">
+              <div key={item.label} className="flex flex-col items-center justify-start rounded-2xl bg-zinc-950 p-4 text-center md:p-6">
                 <span className="text-xs uppercase tracking-[0.16em] text-zinc-500">{item.label}</span>
                 <strong className="mt-2 block text-balance text-lg font-black leading-tight">{item.value}</strong>
               </div>
@@ -144,53 +93,27 @@ export default function MasterPage() {
           </div>
         </div>
 
-        {/* Right: photo */}
         <div className="relative flex items-center px-5 pb-10 md:px-10 md:py-14 lg:p-0">
           <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl bg-white lg:rounded-none">
-            <Image
+            <img
               src="/expert-mk-hero.jpg"
               alt="Игорь Беляев — эксперт по переговорам"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover object-top"
+              className="absolute inset-0 h-full w-full object-cover object-top"
+              fetchPriority="high"
             />
           </div>
         </div>
       </section>
 
-      {/* Для кого */}
-      <section className="px-5 py-12 md:px-10 md:py-16">
-        <h2 className={sectionTitle}>Для кого</h2>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {audience.map((item) => (
-            <div key={item.title} className="flex flex-col overflow-hidden bg-zinc-950">
-              <div className="relative h-72 w-full bg-zinc-950 md:h-80">
-                <Image
-                  src={item.img || "/placeholder.svg"}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col gap-3 p-6 md:p-8">
-                <strong className={cardTitle}>{item.title}</strong>
-                <p className="whitespace-pre-line text-sm leading-relaxed text-zinc-400">{item.text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <WorkshopCases />
 
-      {/* Программа */}
       <section className="px-5 py-12 md:px-10 md:py-16">
         <h2 className={sectionTitle}>На мастер-классе мы разберём</h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {program.map((item) => (
             <div key={item.text} className="flex items-start gap-4 rounded-2xl bg-zinc-950 p-6 md:p-8">
               <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-yellow-400 text-black">
-                <item.icon className="h-5 w-5" strokeWidth={2.5} />
+                <item.icon className="h-5 w-5" strokeWidth={2.5} aria-hidden="true" />
               </span>
               <p className="text-lg leading-relaxed text-zinc-200">{item.text}</p>
             </div>
@@ -198,32 +121,23 @@ export default function MasterPage() {
         </div>
       </section>
 
-      {/* Об эксперте */}
       <section className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr]">
         <div className="relative min-h-[320px] overflow-hidden bg-zinc-950 lg:min-h-full">
-          <Image
+          <img
             src="/expert-profile.jpg"
             alt="Портрет эксперта Игоря Беляева"
-            fill
-            sizes="(max-width: 1024px) 100vw, 36vw"
-            className="object-cover object-top grayscale"
+            className="absolute inset-0 h-full w-full object-cover object-top grayscale"
+            loading="lazy"
           />
         </div>
         <div className="flex flex-col gap-6 px-5 py-10 md:px-10 md:py-12">
           <div>
-            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">
-              Игорь Беляев
-            </h2>
+            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">Игорь Беляев</h2>
             <p className="mt-3 max-w-[46ch] text-lg font-bold leading-snug text-white">
               Ведущий эксперт по сложным управленческим переговорам
             </p>
             <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-zinc-400">
-              Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами
-              крупных корпораций, финансовых институтов и государственных орган��заций.
-              Специализируется на сложных переговорах, переговорах под давлением, управленческом
-              влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы
-              для команд ВТБ, Яндекса, Билайна, Сев��рстали, Правительства Москвы и других
-              организаций.
+              Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами крупных корпораций, финансовых институтов и государственных организаций. Специализируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других организаций.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
@@ -237,61 +151,32 @@ export default function MasterPage() {
         </div>
       </section>
 
-      {/* Кейсы */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <h2 className={sectionTitle}>Кейсы</h2>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800 lg:grid-cols-3">
-          {cases.map((item, i) => (
-            <div key={item.title} className="flex flex-col justify-end gap-3 bg-black p-6 md:p-8">
-              <span className="text-sm font-black text-yellow-400">[{String(i + 1).padStart(2, "0")}]</span>
-              <strong className={cardTitle}>{item.title}</strong>
-              <p className="text-sm leading-relaxed text-zinc-400">{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Участие / Стоимость */}
-      <section id="participation" className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
-        <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+      <section id="participation" className="scroll-mt-6 px-5 py-12 md:px-10 md:py-16">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <div>
-            <h2 className={sectionTitle}>
-              Стоимость <br />и формат
-            </h2>
+            <h2 className={sectionTitle}>Стоимость и формат</h2>
             <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
-              Дата: 6 октября. Формат: онлайн в Zoom с практикой, длительность — 2 часа.
-              Стоимость: 2 990 ₽.
+              6 октября, онлайн в Zoom с практикой. Длительность — 2 часа. Стоимость участия — 9 990 ₽.
             </p>
             <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
-              Мастер-класс проходит в формате бизнес-игры с отдельными комнатами для участников:
-              каждый сможет включиться в практику и получить личное взаимодействие.
+              Мастер-класс проходит в формате бизнес-игры с отдельными комнатами для участников: каждый сможет включиться в практику и получить личное взаимодействие.
+            </p>
+            <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-zinc-500">
+              Оплата через ЮKassa появится после подключения платёжного сервиса. Сейчас можно оставить заявку — это не является оплатой участия.
             </p>
           </div>
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8">
-            <div className="text-[clamp(3rem,8vw,5.5rem)] font-black leading-[0.9] tracking-tight text-yellow-400">
-              2 990 ₽
-            </div>
-            <button
-              type="button"
-              className="mt-6 inline-flex h-12 w-full items-center justify-center rounded-full bg-yellow-400 px-5 font-bold text-black transition-opacity hover:opacity-90"
-            >
-              Оплатить участие
-            </button>
-          </div>
+          <CaptureForm mode="masterclass" />
         </div>
       </section>
 
-      {/* Вопросы */}
-      <section className="border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16">
+      <section className="px-5 py-12 md:px-10 md:py-16">
         <h2 className={`mb-6 ${sectionTitle}`}>Вопросы</h2>
         <div>
           {faq.map((item) => (
-            <details key={item.q} className="group border-t border-zinc-800 py-5 last:border-b">
+            <details key={item.q} className="group py-5">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold [&::-webkit-details-marker]:hidden">
                 <span>{item.q}</span>
-                <span className="text-2xl leading-none text-yellow-400 transition-transform group-open:rotate-45">
-                  +
-                </span>
+                <span className="text-2xl leading-none text-yellow-400 transition-transform group-open:rotate-45" aria-hidden="true">+</span>
               </summary>
               <p className="mt-3 leading-relaxed text-zinc-400">{item.a}</p>
             </details>
@@ -299,29 +184,20 @@ export default function MasterPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-zinc-800 px-5 py-8 text-xs text-zinc-500 md:px-10">
+      <footer className="px-5 py-8 text-xs text-zinc-500 md:px-10">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col gap-1">
             <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Контактное лицо</span>
             <span>Чалунин Максим Александрович</span>
             <span>ИНН 668601656614</span>
           </div>
-          <nav className="flex flex-col gap-2 md:items-end">
-            <Link href="/privacy" className="transition-colors hover:text-yellow-400">
-              Политика конфиденциальности
-            </Link>
-            <Link href="/consent" className="transition-colors hover:text-yellow-400">
-              Согласие на обработку персональных данных
-            </Link>
-            <Link href="/offer" className="transition-colors hover:text-yellow-400">
-              Оферта
-            </Link>
+          <nav className="flex flex-col gap-2 md:items-end" aria-label="Юридические документы">
+            <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных</a>
+            <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных</a>
+            <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта</a>
           </nav>
         </div>
-        <div className="mt-6 border-t border-zinc-800 pt-6">
-          © {new Date().getFullYear()} Все права защищены
-        </div>
+        <div className="mt-6 text-zinc-600">© {new Date().getFullYear()} Все права защищены</div>
       </footer>
     </main>
   )

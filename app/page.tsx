@@ -13,7 +13,7 @@ export default function Page() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
       {/* Top bar */}
-      <header className="flex items-center justify-between border-b border-zinc-800 px-5 py-4 md:px-10">
+      <header className="flex items-center justify-between px-5 py-4 md:px-10">
         <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
         <nav className="flex items-center gap-2">
           <span className="rounded-full bg-yellow-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-black">
@@ -48,7 +48,7 @@ export default function Page() {
           </a>
         </div>
 
-        <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+        <div className="relative overflow-hidden rounded-2xl bg-zinc-950">
           <Image
             src="/expert.jpg"
             alt="Игорь Беляев — эксперт по переговорам"
@@ -67,15 +67,15 @@ export default function Page() {
       {/* Split screen: form (left) + what's inside the guide (right) */}
       <section
         id="zayavka"
-        className="grid scroll-mt-6 grid-cols-1 items-stretch gap-8 border-t border-zinc-800 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
+        className="grid scroll-mt-6 grid-cols-1 items-stretch gap-8 px-5 py-12 md:px-10 md:py-16 lg:grid-cols-2 lg:gap-12"
       >
         <div className="flex h-full flex-col">
           <h2 className="text-balance text-[clamp(2rem,5vw,3.5rem)] font-black uppercase leading-[0.95] tracking-[-0.02em]">
             В гайде я <span className="text-yellow-400">рассказал</span>
           </h2>
-          <ul className="mt-8 grid flex-1 grid-cols-1 content-stretch gap-px overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-800">
+          <ul className="mt-8 grid flex-1 grid-cols-1 content-stretch gap-3 overflow-hidden rounded-2xl">
             {points.map((p, i) => (
-              <li key={i} className="flex items-center gap-4 bg-black p-6 md:p-8">
+              <li key={i} className="flex items-center gap-4 rounded-2xl bg-zinc-950 p-6 md:p-8">
                 <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-yellow-400" aria-hidden="true" />
                 <span className="text-lg leading-relaxed text-zinc-200">{p}</span>
               </li>
@@ -89,8 +89,13 @@ export default function Page() {
       </section>
 
       {/* Footer */}
-      <footer className="flex flex-col gap-2 border-t border-zinc-800 px-5 py-8 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10">
+      <footer className="flex flex-col gap-4 px-5 py-8 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10">
         <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Игорь Беляев</span>
+        <nav className="flex flex-col gap-2 md:flex-row md:gap-5" aria-label="Юридические документы">
+          <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных</a>
+          <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных</a>
+          <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта</a>
+        </nav>
         <span>© {new Date().getFullYear()} Все права защищены</span>
       </footer>
     </main>
