@@ -8,7 +8,7 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 const challengeHeaders = {
-  'WWW-Authenticate': 'Basic realm="Выгрузка заявок", charset="UTF-8"',
+  'WWW-Authenticate': 'Basic realm="Leads export", charset="UTF-8"',
   'Cache-Control': 'no-store',
 }
 
