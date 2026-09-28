@@ -1,5 +1,4 @@
 import Image from "next/image"
-import Link from "next/link"
 import { CaptureForm } from "@/components/capture-form"
 
 const points = [
@@ -13,19 +12,8 @@ export default function Page() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
       {/* Top bar */}
-      <header className="flex items-center justify-between px-5 py-4 md:px-10">
+      <header className="flex items-center px-5 py-4 md:px-10">
         <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
-        <nav className="flex items-center gap-2">
-          <span className="rounded-full bg-yellow-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-black">
-            Гайд
-          </span>
-          <Link
-            href="/master"
-            className="rounded-full border border-zinc-700 px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:border-yellow-400 hover:text-yellow-400"
-          >
-            Мастер-класс
-          </Link>
-        </nav>
       </header>
 
       {/* Hero: headline (left) + photo (right on desktop) */}

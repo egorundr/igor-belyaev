@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { Banknote, Ban, Gauge, Users } from "lucide-react"
 import { CaptureForm } from "@/components/capture-form"
 import { WorkshopCases } from "@/components/workshop-cases"
@@ -56,16 +55,8 @@ const sectionTitle = "text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-black 
 export default function MasterPage() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
-      <header className="flex items-center justify-between px-5 py-4 md:px-10">
+      <header className="flex items-center px-5 py-4 md:px-10">
         <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
-        <nav className="flex items-center gap-2" aria-label="Разделы сайта">
-          <Link href="/" className="rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition-colors hover:text-yellow-400">
-            Гайд
-          </Link>
-          <span className="rounded-full bg-yellow-400 px-4 py-2 text-xs font-bold uppercase tracking-wide text-black">
-            Мастер-класс
-          </span>
-        </nav>
       </header>
 
       <section className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
