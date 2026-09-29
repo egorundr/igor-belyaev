@@ -156,13 +156,13 @@ export default function MasterPage() {
               <p className="font-bold">Онлайн мастер-класс в Zoom</p>
               <p><span className="text-zinc-400">Дата и время:</span> 6 октября, 19:30</p>
               <p><span className="text-zinc-400">Длительность:</span> 2 часа</p>
-              <p><span className="text-zinc-400">Стоимость участия:</span> 9 990 ₽</p>
+              <p><span className="text-zinc-400">Стоимость участия:</span> 9 990 рублей</p>
             </div>
             <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-zinc-400">
               Мастер-класс проходит в формате бизнес-игры с отдельными комнатами для участников: каждый сможет включиться в практику и получить личное взаимодействие.
             </p>
             <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-zinc-500">
-              Онлайн-оплата пока не подключена. Отправка формы не списывает деньги — организатор свяжется с вами, чтобы обсудить участие и оплату.
+              После заполнения формы вы перейдёте на защищённую страницу ЮKassa. Участие подтвердится после успешной оплаты.
             </p>
           </div>
           <CaptureForm mode="masterclass" />

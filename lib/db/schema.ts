@@ -8,6 +8,10 @@ export const workshopLeads = pgTable('workshop_leads', {
   consentAt: timestamp('consent_at', { withTimezone: true }).notNull().defaultNow(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   source: text('source').notNull().default('masterclass'),
+  checkoutKey: text('checkout_key'),
+  yookassaPaymentId: text('yookassa_payment_id'),
+  paymentStatus: text('payment_status'),
+  paymentConfirmationUrl: text('payment_confirmation_url'),
 })
 
 export type WorkshopLead = typeof workshopLeads.$inferSelect
