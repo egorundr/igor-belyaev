@@ -32,6 +32,9 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
       telegram: String(data.get("telegram") ?? ""),
       consent: data.get("consent") === "on",
       source: mode,
+      ...(isMasterclass
+        ? { salebotClientId: new URLSearchParams(window.location.search).get("salebot_client_id") ?? "" }
+        : {}),
     }
 
     setSubmitting(true)

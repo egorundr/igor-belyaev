@@ -14,6 +14,7 @@ export const workshopLeads = pgTable('workshop_leads', {
   paymentConfirmationUrl: text('payment_confirmation_url'),
   salebotNotificationStatus: text('salebot_notification_status'),
   salebotNotificationUpdatedAt: timestamp('salebot_notification_updated_at', { withTimezone: true }),
+  salebotClientId: text('salebot_client_id'),
 })
 
 export type WorkshopLead = typeof workshopLeads.$inferSelect

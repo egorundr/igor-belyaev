@@ -55,10 +55,15 @@ async function findClientId(apiKey: string, phone: string): Promise<string | nul
   return extractClientId(body)
 }
 
-export async function sendSaleBotPaymentSuccess(phone: string) {
+export async function sendSaleBotPaymentSuccess(phone: string, providedClientId?: string | null) {
   const apiKey = getApiKey()
-  const clientId = await findClientId(apiKey, phone)
-  if (!clientId) return { delivered: false as const, reason: 'client_not_found' as const }
+  const clientId = providedClientId
+    ? (/^\d{1,20}$/.test(providedClientId) ? providedClientId : null)
+    : await findClientId(apiKey, phone)
+  if (!clientId) {
+    if (providedClientId) throw new Error('Invalid SaleBot client ID')
+    return { delivered: false as const, reason: 'client_not_found' as const }
+  }
 
   const response = await fetch(`${API_BASE_URL}/${encodeURIComponent(apiKey)}/message`, {
     method: 'POST',

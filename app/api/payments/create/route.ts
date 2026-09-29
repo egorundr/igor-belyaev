@@ -40,6 +40,7 @@ export async function POST(request: Request) {
   const name = typeof values.name === 'string' ? values.name.trim() : ''
   const phone = typeof values.phone === 'string' ? values.phone.trim() : ''
   const telegram = typeof values.telegram === 'string' ? values.telegram.trim() : ''
+  const salebotClientId = typeof values.salebotClientId === 'string' ? values.salebotClientId.trim() : ''
   const checkoutKey = typeof values.checkoutKey === 'string' ? values.checkoutKey : ''
   const phoneDigits = phone.replace(/\D/g, '')
 
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
     return jsonError('Проверьте номер телефона.', 400)
   }
   const telegramUsername = telegram.startsWith('@') ? telegram.slice(1) : telegram
-  if (!/^[A-Za-z0-9_]{5,32}$/.test(telegramUsername) || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(checkoutKey) || values.consent !== true) {
+  if (!/^[A-Za-z0-9_]{5,32}$/.test(telegramUsername) || (salebotClientId && !/^\d{1,20}$/.test(salebotClientId)) || !/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(checkoutKey) || values.consent !== true) {
     return jsonError('Укажите корректный ник Telegram и подтвердите согласие на обработку данных.', 400)
   }
 
@@ -58,6 +59,7 @@ export async function POST(request: Request) {
       name,
       phone,
       telegram,
+      salebotClientId: salebotClientId || null,
       source: 'masterclass',
       consentAt: new Date(),
       checkoutKey,

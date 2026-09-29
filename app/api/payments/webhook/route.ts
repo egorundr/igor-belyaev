@@ -72,12 +72,16 @@ export async function POST(request: Request) {
           lt(workshopLeads.salebotNotificationUpdatedAt, retryBefore),
         ),
       ),
-    )).returning({ id: workshopLeads.id, phone: workshopLeads.phone })
+    )).returning({
+      id: workshopLeads.id,
+      phone: workshopLeads.phone,
+      salebotClientId: workshopLeads.salebotClientId,
+    })
 
     if (!claimedLead) return NextResponse.json({ ok: true })
 
     try {
-      const result = await sendSaleBotPaymentSuccess(claimedLead.phone)
+      const result = await sendSaleBotPaymentSuccess(claimedLead.phone, claimedLead.salebotClientId)
       const notificationStatus = result.delivered ? 'sent' : 'not_found'
       await db.update(workshopLeads).set({
         salebotNotificationStatus: notificationStatus,
