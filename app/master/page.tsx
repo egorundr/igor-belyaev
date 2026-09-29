@@ -1,12 +1,18 @@
+import type { Metadata } from "next"
 import { Banknote, Ban, Gauge, Users } from "lucide-react"
 import { CaptureForm } from "@/components/capture-form"
+
+export const metadata: Metadata = {
+  title: "Мастер-класс по переговорам — Игорь Беляев",
+  description: "Практический онлайн-мастер-класс Игоря Беляева о сложных переговорах, давлении и защите своей позиции.",
+}
 import { WorkshopCases } from "@/components/workshop-cases"
 
 const meta = [
-  { label: "Дата", value: "6 октября" },
-  { label: "Формат", value: "Онлайн, Zoom с практикой" },
+  { label: "Дата и время", value: "6 октября, 19:30" },
+  { label: "Формат", value: "Онлайн мастер-класс в Zoom" },
   { label: "Длительность", value: "2 часа" },
-  { label: "Стоимость", value: "9 990 ₽" },
+  { label: "Стоимость участия", value: "9 990 ₽" },
 ]
 
 const program = [
@@ -55,10 +61,6 @@ const sectionTitle = "text-balance text-[clamp(2.25rem,5vw,4.25rem)] font-black 
 export default function MasterPage() {
   return (
     <main className="min-h-dvh bg-black font-sans text-white">
-      <header className="flex items-center px-5 py-4 md:px-10">
-        <span className="text-sm font-black uppercase tracking-[0.2em]">Игорь Беляев</span>
-      </header>
-
       <section className="grid grid-cols-1 items-stretch lg:grid-cols-[1.1fr_0.9fr]">
         <div className="flex flex-col justify-between gap-10 px-5 py-10 md:px-10 md:py-14">
           <div>
@@ -70,7 +72,7 @@ export default function MasterPage() {
               Как сохранять сильную позицию в переговорах, обсуждать деньги и условия, выдерживать давление и приходить к конкретным договорённостям.
             </p>
             <a href="#participation" className="mt-8 inline-flex h-12 items-center justify-center rounded-full bg-yellow-400 px-7 font-bold text-black transition-opacity hover:opacity-90">
-              Оставить заявку
+              Оплатить
             </a>
           </div>
 
@@ -112,7 +114,7 @@ export default function MasterPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-[0.72fr_1.28fr]">
+      <section className="grid grid-cols-1 lg:grid-cols-[0.62fr_1.38fr]">
         <div className="relative min-h-[320px] overflow-hidden bg-zinc-950 lg:min-h-full">
           <img
             src="/expert-profile.jpg"
@@ -121,15 +123,19 @@ export default function MasterPage() {
             loading="lazy"
           />
         </div>
-        <div className="flex flex-col gap-6 px-5 py-10 md:px-10 md:py-12">
-          <div>
-            <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">Игорь Беляев</h2>
-            <p className="mt-3 max-w-[46ch] text-lg font-bold leading-snug text-white">
-              Ведущий эксперт по сложным управленческим переговорам
-            </p>
-            <p className="mt-4 max-w-[62ch] text-[15px] leading-relaxed text-zinc-400">
-              Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами крупных корпораций, финансовых институтов и государственных организаций. Специализируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов. Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других организаций.
-            </p>
+        <div className="flex flex-col gap-8 px-5 py-10 md:px-10 md:py-12">
+          <div className="flex flex-col gap-5">
+            <div>
+              <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-black uppercase leading-[0.98] tracking-[-0.03em]">Игорь Беляев</h2>
+              <p className="mt-3 text-lg font-bold leading-snug text-white">
+                Ведущий эксперт по сложным управленческим переговорам
+              </p>
+            </div>
+            <div className="flex max-w-[76ch] flex-col gap-4 text-base leading-relaxed text-zinc-400">
+              <p>Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами крупных корпораций, финансовых институтов и государственных организаций.</p>
+              <p>Специализируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов.</p>
+              <p>Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других организаций.</p>
+            </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
             {facts.map((fact) => (
@@ -146,14 +152,17 @@ export default function MasterPage() {
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <div>
             <h2 className={sectionTitle}>Стоимость и формат</h2>
-            <p className="mt-5 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
-              6 октября, онлайн в Zoom с практикой. Длительность — 2 часа. Стоимость участия — 9 990 ₽.
-            </p>
-            <p className="mt-4 max-w-[52ch] text-lg leading-relaxed text-zinc-400">
+            <div className="mt-6 flex flex-col gap-3 text-lg leading-relaxed text-zinc-200">
+              <p className="font-bold">Онлайн мастер-класс в Zoom</p>
+              <p><span className="text-zinc-400">Дата и время:</span> 6 октября, 19:30</p>
+              <p><span className="text-zinc-400">Длительность:</span> 2 часа</p>
+              <p><span className="text-zinc-400">Стоимость участия:</span> 9 990 ₽</p>
+            </div>
+            <p className="mt-6 max-w-[60ch] text-base leading-relaxed text-zinc-400">
               Мастер-класс проходит в формате бизнес-игры с отдельными комнатами для участников: каждый сможет включиться в практику и получить личное взаимодействие.
             </p>
-            <p className="mt-4 max-w-[52ch] text-sm leading-relaxed text-zinc-500">
-              Оплата через ЮKassa появится после подключения платёжного сервиса. Сейчас можно оставить заявку — это не является оплатой участия.
+            <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-zinc-500">
+              Онлайн-оплата пока не подключена. Отправка формы не списывает деньги — организатор свяжется с вами, чтобы обсудить участие и оплату.
             </p>
           </div>
           <CaptureForm mode="masterclass" />
@@ -183,9 +192,9 @@ export default function MasterPage() {
             <span>ИНН 668601656614</span>
           </div>
           <nav className="flex flex-col gap-2 md:items-end" aria-label="Юридические документы">
-            <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных</a>
-            <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных</a>
-            <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта</a>
+            <a href="/legal/privacy.pdf" download className="transition-colors hover:text-yellow-400">Скачать политику обработки персональных данных (PDF)</a>
+            <a href="/legal/consent.pdf" download className="transition-colors hover:text-yellow-400">Скачать согласие на обработку персональных данных (PDF)</a>
+            <a href="/legal/offer.pdf" download className="transition-colors hover:text-yellow-400">Скачать публичную оферту (PDF)</a>
           </nav>
         </div>
         <div className="mt-6 text-zinc-600">© {new Date().getFullYear()} Все права защищены</div>
