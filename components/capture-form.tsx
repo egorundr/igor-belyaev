@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 type CaptureFormProps = {
   mode?: "guide" | "masterclass"
@@ -17,6 +17,7 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const checkoutKey = useRef<string | null>(null)
   const isMasterclass = mode === "masterclass"
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -37,13 +38,22 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
     setError(null)
 
     try {
-      const response = await fetch("/api/leads", {
+      const endpoint = isMasterclass ? "/api/payments/create" : "/api/leads"
+      if (isMasterclass) {
+        checkoutKey.current ??= window.crypto.randomUUID()
+      }
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ ...payload, ...(isMasterclass ? { checkoutKey: checkoutKey.current } : {}) }),
       })
       const result = await response.json().catch(() => null)
       if (!response.ok) throw new Error(result?.error ?? "Не удалось отправить заявку. Попробуйте ещё раз.")
+      if (isMasterclass) {
+        if (typeof result?.redirectUrl !== "string") throw new Error("Не удалось получить ссылку на оплату. Попробуйте ещё раз.")
+        window.location.assign(result.redirectUrl)
+        return
+      }
       setSubmitted(true)
     } catch (submissionError) {
       setError(submissionError instanceof Error ? submissionError.message : "Не удалось отправить заявку. Попробуйте ещё раз.")
@@ -61,12 +71,10 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
           </svg>
         </span>
         <h2 className="mt-6 font-sans text-3xl font-black uppercase leading-none tracking-tight text-white md:text-4xl">
-          {isMasterclass ? "Заявка принята" : "Спасибо!"}
+          Спасибо!
         </h2>
         <p className="mt-3 text-pretty leading-relaxed text-zinc-400">
-          {isMasterclass
-            ? "Это не оплата участия: контактное лицо свяжется с вами и расскажет о следующих шагах."
-            : "Данные сохранены. Перейдите в Telegram-бота, чтобы забрать гайд."}
+          Данные сохранены. Перейдите в Telegram-бота, чтобы забрать гайд.
         </p>
         {!isMasterclass && (
           <a
@@ -141,7 +149,7 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
         disabled={submitting}
         className="mt-1 h-14 w-full rounded-xl bg-yellow-400 text-base font-black uppercase tracking-wide text-black transition-colors hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {submitting ? "Отправка..." : isMasterclass ? "Оставить заявку" : "Забрать гайд в Telegram"}
+        {submitting ? (isMasterclass ? "Переход к оплате..." : "Отправка...") : isMasterclass ? "Оплатить — 9 990 рублей" : "Забрать гайд в Telegram"}
       </button>
     </form>
   )

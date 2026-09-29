@@ -1,170 +1,170 @@
-import { eq } from 'drizzle-orm'
+import { and, eq } from 'drizzle-orm'
 import { getDb } from '@/lib/db'
 import { workshopLeads } from '@/lib/db/schema'
 
-export const MASTERCLASS_PRICE = '9990.00'
+const API_URL = 'https://api.yookassa.ru/v3'
+export const MASTERCLASS_PRICE = 9990
+export const MASTERCLASS_AMOUNT = MASTERCLASS_PRICE.toFixed(2)
+export const MASTERCLASS_DESCRIPTION = 'Участие в онлайн-мастер-классе по переговорам'
 
 export type YooKassaPayment = {
   id: string
-  status: 'pending' | 'waiting_for_capture' | 'succeeded' | 'canceled'
-  amount: { value: string; currency: string }
+  status: string
+  amount?: { value?: string; currency?: string }
   metadata?: Record<string, string>
   confirmation?: { confirmation_url?: string }
 }
 
-function getCredentials() {
-  const shopId = process.env.YOOKASSA_SHOP_ID
-  const secretKey = process.env.YOOKASSA_SECRET_KEY
-  if (!shopId || !secretKey) throw new Error('YooKassa credentials are not configured')
-  return { shopId, secretKey }
-}
+export function getYooKassaConfig() {
+  const shopId = process.env.YOOKASSA_SHOP_ID?.trim()
+  const secretKey = process.env.YOOKASSA_SECRET_KEY?.trim()
+  const siteUrl = process.env.SITE_URL?.trim()
+  const vatCode = Number(process.env.YOOKASSA_VAT_CODE)
 
-function authorizationHeader() {
-  const { shopId, secretKey } = getCredentials()
-  return `Basic ${Buffer.from(`${shopId}:${secretKey}`).toString('base64')}`
-}
+  if (!shopId || !secretKey || !siteUrl || !Number.isInteger(vatCode) || vatCode < 1) return null
 
-export async function createYooKassaPayment(input: {
-  checkoutKey: string
-  leadId: number
-  returnUrl: string
-}) {
-  const response = await fetch('https://api.yookassa.ru/v3/payments', {
-    method: 'POST',
-    headers: {
-      Authorization: authorizationHeader(),
-      'Content-Type': 'application/json',
-      'Idempotence-Key': input.checkoutKey,
-    },
-    body: JSON.stringify({
-      amount: { value: MASTERCLASS_PRICE, currency: 'RUB' },
-      capture: true,
-      confirmation: { type: 'redirect', return_url: input.returnUrl },
-      description: 'Участие в онлайн-мастер-классе по переговорам',
-      metadata: { lead_id: String(input.leadId), checkout_key: input.checkoutKey },
-    }),
-    cache: 'no-store',
-    signal: AbortSignal.timeout(15000),
-  })
-
-  if (!response.ok) {
-    console.error('[payments] YooKassa create request failed:', response.status)
-    throw new Error('YooKassa could not create the payment')
+  try {
+    const url = new URL(siteUrl)
+    if (url.protocol !== 'https:' && url.hostname !== 'localhost') return null
+    return { shopId, secretKey, siteUrl: url.origin, vatCode }
+  } catch {
+    return null
   }
-
-  return (await response.json()) as YooKassaPayment
 }
 
-export async function fetchYooKassaPayment(paymentId: string) {
-  const response = await fetch(`https://api.yookassa.ru/v3/payments/${encodeURIComponent(paymentId)}`, {
-    headers: { Authorization: authorizationHeader() },
+async function yooKassaRequest<T>(path: string, init: RequestInit = {}): Promise<T> {
+  const config = getYooKassaConfig()
+  if (!config) throw new Error('YooKassa is not configured')
+
+  const authorization = Buffer.from(`${config.shopId}:${config.secretKey}`).toString('base64')
+  const response = await fetch(`${API_URL}${path}`, {
+    ...init,
+    headers: {
+      Authorization: `Basic ${authorization}`,
+      'Content-Type': 'application/json',
+      ...init.headers,
+    },
     cache: 'no-store',
     signal: AbortSignal.timeout(12000),
   })
 
-  if (!response.ok) {
-    console.error('[payments] YooKassa payment lookup failed:', response.status)
-    throw new Error('YooKassa payment lookup failed')
+  if (!response.ok) throw new Error(`YooKassa request failed (${response.status})`)
+  return response.json() as Promise<T>
+}
+
+function formatReceiptPhone(phone: string) {
+  const digits = phone.replace(/\D/g, '')
+  if (digits.length === 10) return `+7${digits}`
+  if (digits.length === 11 && digits.startsWith('8')) return `+7${digits.slice(1)}`
+  return `+${digits}`
+}
+
+export async function createYooKassaPayment({
+  leadId,
+  checkoutKey,
+  phone,
+}: {
+  leadId: number
+  checkoutKey: string
+  phone: string
+}) {
+  const config = getYooKassaConfig()
+  if (!config) throw new Error('YooKassa is not configured')
+
+  return yooKassaRequest<YooKassaPayment>('/payments', {
+    method: 'POST',
+    headers: { 'Idempotence-Key': checkoutKey },
+    body: JSON.stringify({
+      amount: { value: MASTERCLASS_AMOUNT, currency: 'RUB' },
+      capture: true,
+      confirmation: {
+        type: 'redirect',
+        return_url: `${config.siteUrl}/master/payment?checkout_key=${encodeURIComponent(checkoutKey)}`,
+      },
+      description: MASTERCLASS_DESCRIPTION,
+      metadata: { lead_id: String(leadId), checkout_key: checkoutKey },
+      receipt: {
+        customer: { phone: formatReceiptPhone(phone) },
+        items: [
+          {
+            description: MASTERCLASS_DESCRIPTION,
+            quantity: '1.00',
+            amount: { value: MASTERCLASS_AMOUNT, currency: 'RUB' },
+            payment_mode: 'full_payment',
+            payment_subject: 'service',
+            vat_code: config.vatCode,
+          },
+        ],
+      },
+    }),
+  })
+}
+
+export function getYooKassaPayment(paymentId: string) {
+  return yooKassaRequest<YooKassaPayment>(`/payments/${encodeURIComponent(paymentId)}`)
+}
+
+export function isYooKassaCheckoutUrl(value: unknown): value is string {
+  if (typeof value !== 'string') return false
+  try {
+    const url = new URL(value)
+    return url.protocol === 'https:' && ['yookassa.ru', 'yoomoney.ru'].some((domain) =>
+      url.hostname === domain || url.hostname.endsWith(`.${domain}`),
+    )
+  } catch {
+    return false
   }
-
-  return (await response.json()) as YooKassaPayment
 }
 
-export async function verifyAndStorePayment(paymentId: string) {
-  const db = getDb()
-  const [lead] = await db
-    .select({ id: workshopLeads.id, yookassaPaymentId: workshopLeads.yookassaPaymentId })
-    .from(workshopLeads)
-    .where(eq(workshopLeads.yookassaPaymentId, paymentId))
-    .limit(1)
-
-  if (!lead) return null
-
-  const payment = await fetchYooKassaPayment(paymentId)
-  if (
-    payment.id !== paymentId ||
-    payment.metadata?.lead_id !== String(lead.id) ||
-    payment.amount?.value !== MASTERCLASS_PRICE ||
-    payment.amount?.currency !== 'RUB'
-  ) {
-    throw new Error('YooKassa payment does not match the order')
-  }
-
-  const status = payment.status === 'succeeded'
-    ? 'paid'
-    : payment.status === 'canceled'
-      ? 'canceled'
-      : 'pending'
-
-  await db
-    .update(workshopLeads)
-    .set({ paymentStatus: status })
-    .where(eq(workshopLeads.yookassaPaymentId, paymentId))
-
-  return status
-}
-
-export function isYooKassaConfigured() {
-  return Boolean(process.env.YOOKASSA_SHOP_ID && process.env.YOOKASSA_SECRET_KEY)
-}
-
-export function isValidPaymentId(value: unknown): value is string {
-  return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)
+export function isMasterclassAmount(amount: YooKassaPayment['amount']) {
+  return amount?.currency === 'RUB' && Number(amount.value) === MASTERCLASS_PRICE
 }
 
 export function isValidCheckoutKey(value: unknown): value is string {
-  return isValidPaymentId(value)
+  return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value)
+}
+
+export function isYooKassaConfigured() {
+  return getYooKassaConfig() !== null
 }
 
 export async function getLeadPaymentByCheckoutKey(checkoutKey: string) {
   const [lead] = await getDb()
     .select({ paymentId: workshopLeads.yookassaPaymentId, status: workshopLeads.paymentStatus })
     .from(workshopLeads)
-    .where(eq(workshopLeads.checkoutKey, checkoutKey))
+    .where(and(eq(workshopLeads.checkoutKey, checkoutKey), eq(workshopLeads.source, 'masterclass')))
     .limit(1)
   return lead ?? null
 }
 
-export async function getLeadPaymentById(id: number) {
-  const [lead] = await getDb()
-    .select({ paymentId: workshopLeads.yookassaPaymentId, status: workshopLeads.paymentStatus })
+export async function verifyAndStorePayment(paymentId: string) {
+  const db = getDb()
+  const [lead] = await db
+    .select({ id: workshopLeads.id, checkoutKey: workshopLeads.checkoutKey })
     .from(workshopLeads)
-    .where(eq(workshopLeads.id, id))
+    .where(and(eq(workshopLeads.yookassaPaymentId, paymentId), eq(workshopLeads.source, 'masterclass')))
     .limit(1)
-  return lead ?? null
-}
 
-export async function getLeadPaymentByPaymentId(paymentId: string) {
-  const [lead] = await getDb()
-    .select({ id: workshopLeads.id, status: workshopLeads.paymentStatus })
-    .from(workshopLeads)
-    .where(eq(workshopLeads.yookassaPaymentId, paymentId))
-    .limit(1)
-  return lead ?? null
-}
+  if (!lead?.checkoutKey) return null
 
-export async function updatePaymentStatusForCheckout(checkoutKey: string, status: string) {
-  const [lead] = await getDb().select({ id: workshopLeads.id }).from(workshopLeads).where(eq(workshopLeads.checkoutKey, checkoutKey)).limit(1)
-  if (lead) await updatePaymentStatusForLead(lead.id, status)
-}
+  const payment = await getYooKassaPayment(paymentId)
+  if (
+    payment.id !== paymentId ||
+    payment.metadata?.lead_id !== String(lead.id) ||
+    payment.metadata?.checkout_key !== lead.checkoutKey ||
+    !isMasterclassAmount(payment.amount)
+  ) {
+    throw new Error('YooKassa payment does not match the order')
+  }
 
-export async function updatePaymentStatusForLead(leadId: number, status: string) {
-  await getDb()
-    .update(workshopLeads)
-    .set({ paymentStatus: status })
-    .where(eq(workshopLeads.id, leadId))
-}
+  if (payment.status === 'succeeded') {
+    await db.update(workshopLeads).set({ paymentStatus: 'succeeded' }).where(eq(workshopLeads.id, lead.id))
+  } else if (payment.status === 'canceled') {
+    await db.update(workshopLeads).set({ paymentStatus: 'canceled' }).where(and(
+      eq(workshopLeads.id, lead.id),
+      eq(workshopLeads.paymentStatus, 'pending'),
+    ))
+  }
 
-export async function savePaymentIdAndStatus(leadId: number, paymentId: string, status: string) {
-  await getDb()
-    .update(workshopLeads)
-    .set({ yookassaPaymentId: paymentId, paymentStatus: status })
-    .where(eq(workshopLeads.id, leadId))
-}
-
-export async function storePaymentStatus(paymentId: string, status: string) {
-  await getDb()
-    .update(workshopLeads)
-    .set({ paymentStatus: status })
-    .where(eq(workshopLeads.yookassaPaymentId, paymentId))
+  return payment.status
 }
