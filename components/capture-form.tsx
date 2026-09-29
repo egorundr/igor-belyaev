@@ -32,6 +32,9 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
       telegram: String(data.get("telegram") ?? ""),
       consent: data.get("consent") === "on",
       source: mode,
+      ...(isMasterclass
+        ? { salebotClientId: new URLSearchParams(window.location.search).get("salebot_client_id") ?? "" }
+        : {}),
     }
 
     setSubmitting(true)
@@ -112,7 +115,7 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
               name={field.id}
               type={field.type}
               autoComplete={field.autoComplete}
-              required={field.required}
+              required={field.required || (isMasterclass && field.id === "telegram")}
               placeholder={field.placeholder}
               maxLength={field.id === "name" ? 120 : field.id === "phone" ? 32 : 64}
               className="h-12 w-full rounded-xl border border-zinc-800 bg-black px-4 text-white outline-none transition-colors placeholder:text-zinc-600 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400"
