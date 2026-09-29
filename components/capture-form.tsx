@@ -123,11 +123,11 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
         />
         <label htmlFor={`${mode}-consent`} className="cursor-pointer select-none leading-snug">
           Я даю{" "}
-          <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="text-zinc-200 underline transition-colors hover:text-yellow-400">
+          <a href="/legal/consent.pdf" download className="text-zinc-200 underline transition-colors hover:text-yellow-400">
             согласие на обработку персональных данных
           </a>{" "}
           в соответствии с{" "}
-          <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="text-zinc-200 underline transition-colors hover:text-yellow-400">
+          <a href="/legal/privacy.pdf" download className="text-zinc-200 underline transition-colors hover:text-yellow-400">
             политикой обработки персональных данных
           </a>
           .
