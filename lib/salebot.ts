@@ -1,5 +1,5 @@
 const API_BASE_URL = 'https://chatter.salebot.pro/api'
-const PAYMENT_SUCCESS_MESSAGE = 'Оплата мастер-класса прошла успешно. Спасибо за участие!'
+const PAYMENT_SUCCESS_CALLBACK = 'SUCCESS_PAY'
 
 function getApiKey() {
   const apiKey = process.env.SALEBOT_API_KEY?.trim()
@@ -9,76 +9,30 @@ function getApiKey() {
   return apiKey
 }
 
-function normalizePhone(phone: string) {
-  const digits = phone.replace(/\D/g, '')
-  if (digits.length < 10 || digits.length > 15) throw new Error('Invalid client phone')
-  return phone.startsWith('+') ? `+${digits}` : digits
-}
-
-function extractClientId(value: unknown): string | null {
-  if (typeof value === 'number' && Number.isSafeInteger(value) && value > 0) return String(value)
-  if (typeof value === 'string' && /^\d{1,20}$/.test(value.trim()) && value.trim() !== '0') {
-    return value.trim()
+export async function sendSaleBotPaymentSuccess(clientId?: string | null) {
+  if (!clientId || !/^\d{1,20}$/.test(clientId)) {
+    return { delivered: false as const, reason: 'client_id_missing' as const }
   }
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return null
 
-  const record = value as Record<string, unknown>
-  for (const key of ['client_id', 'clientId', 'id']) {
-    const clientId = extractClientId(record[key])
-    if (clientId) return clientId
-  }
-  return null
-}
-
-async function readResponse(response: Response) {
-  const text = await response.text()
-  if (!text) return null
-  try {
-    return JSON.parse(text) as unknown
-  } catch {
-    return text
-  }
-}
-
-async function findClientId(apiKey: string, phone: string): Promise<string | null> {
-  const url = new URL(`${API_BASE_URL}/${encodeURIComponent(apiKey)}/find_client_id_by_phone`)
-  url.searchParams.set('phone', normalizePhone(phone))
-
-  const response = await fetch(url, {
-    method: 'GET',
-    cache: 'no-store',
-    signal: AbortSignal.timeout(10000),
-  })
-  if (response.status === 404) return null
-  const body = await readResponse(response)
-  if (!response.ok) throw new Error(`SaleBot client lookup failed (${response.status})`)
-  return extractClientId(body)
-}
-
-export async function sendSaleBotPaymentSuccess(phone: string, providedClientId?: string | null) {
   const apiKey = getApiKey()
-  const clientId = providedClientId
-    ? (/^\d{1,20}$/.test(providedClientId) ? providedClientId : null)
-    : await findClientId(apiKey, phone)
-  if (!clientId) {
-    if (providedClientId) throw new Error('Invalid SaleBot client ID')
-    return { delivered: false as const, reason: 'client_not_found' as const }
-  }
-
-  const response = await fetch(`${API_BASE_URL}/${encodeURIComponent(apiKey)}/message`, {
+  const response = await fetch(`${API_BASE_URL}/${encodeURIComponent(apiKey)}/callback`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ client_id: clientId, message: PAYMENT_SUCCESS_MESSAGE }),
+    body: JSON.stringify({ client_id: clientId, message: PAYMENT_SUCCESS_CALLBACK }),
     cache: 'no-store',
     signal: AbortSignal.timeout(10000),
   })
-  const body = await readResponse(response)
-  const success = body === 1 || body === '1' || body === true || (
-    Boolean(body) && typeof body === 'object' &&
-    ((body as Record<string, unknown>).success === true || (body as Record<string, unknown>).result === 1)
-  )
+  const responseText = await response.text()
+  let body: unknown = responseText
+  try {
+    body = responseText ? JSON.parse(responseText) as unknown : null
+  } catch {
+    // SaleBot may return a plain-text success response.
+  }
 
-  if (!response.ok || !success) throw new Error(`SaleBot message send failed (${response.status})`)
+  if (!response.ok || (body && typeof body === 'object' && (body as Record<string, unknown>).success === false)) {
+    throw new Error(`SaleBot callback failed (${response.status})`)
+  }
   return { delivered: true as const }
 }
 

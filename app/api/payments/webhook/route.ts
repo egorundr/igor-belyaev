@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     if (!claimedLead) return NextResponse.json({ ok: true })
 
     try {
-      const result = await sendSaleBotPaymentSuccess(claimedLead.phone, claimedLead.salebotClientId)
+      const result = await sendSaleBotPaymentSuccess(claimedLead.salebotClientId)
       const notificationStatus = result.delivered ? 'sent' : 'not_found'
       await db.update(workshopLeads).set({
         salebotNotificationStatus: notificationStatus,
