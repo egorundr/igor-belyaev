@@ -75,9 +75,9 @@ export default function Page() {
       <footer className="flex flex-col gap-4 px-5 py-8 text-xs text-zinc-500 md:flex-row md:items-center md:justify-between md:px-10">
         <span className="font-black uppercase tracking-[0.2em] text-zinc-300">Игорь Беляев</span>
         <nav className="flex flex-col gap-2 md:flex-row md:gap-5" aria-label="Юридические документы">
-          <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных (PDF)</a>
-          <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных (PDF)</a>
-          <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта (PDF)</a>
+          <a href="/legal/privacy.pdf" download className="transition-colors hover:text-yellow-400">Скачать политику обработки персональных данных (PDF)</a>
+          <a href="/legal/consent.pdf" download className="transition-colors hover:text-yellow-400">Скачать согласие на обработку персональных данных (PDF)</a>
+          <a href="/legal/offer.pdf" download className="transition-colors hover:text-yellow-400">Скачать публичную оферту (PDF)</a>
         </nav>
         <span>© {new Date().getFullYear()} Все права защищены</span>
       </footer>
