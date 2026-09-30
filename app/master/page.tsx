@@ -192,9 +192,9 @@ export default function MasterPage() {
             <span>ИНН 668601656614</span>
           </div>
           <nav className="flex flex-col gap-2 md:items-end" aria-label="Юридические документы">
-            <a href="/legal/privacy.pdf" download className="transition-colors hover:text-yellow-400">Скачать политику обработки персональных данных (PDF)</a>
-            <a href="/legal/consent.pdf" download className="transition-colors hover:text-yellow-400">Скачать согласие на обработку персональных данных (PDF)</a>
-            <a href="/legal/offer.pdf" download className="transition-colors hover:text-yellow-400">Скачать публичную оферту (PDF)</a>
+            <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных (PDF)</a>
+            <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных (PDF)</a>
+            <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта (PDF)</a>
           </nav>
         </div>
         <div className="mt-6 text-zinc-600">© {new Date().getFullYear()} Все права защищены</div>
