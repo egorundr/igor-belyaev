@@ -133,7 +133,7 @@ export default function MasterPage() {
             </div>
             <div className="flex max-w-[76ch] flex-col gap-4 text-base leading-relaxed text-zinc-400">
               <p>Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами крупных корпораций, финансовых институтов и государственных организаций.</p>
-              <p>Специали��ируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов.</p>
+              <p>Специали������ируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов.</p>
               <p>Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других организаций.</p>
             </div>
           </div>
@@ -192,9 +192,9 @@ export default function MasterPage() {
             <span>ИНН 668601656614</span>
           </div>
           <nav className="flex flex-col gap-2 md:items-end" aria-label="Юридические документы">
-            <a href="/legal/privacy.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных (PDF)</a>
-            <a href="/legal/consent.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных (PDF)</a>
-            <a href="/legal/offer.pdf" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта (PDF)</a>
+            <a href="https://drive.google.com/file/d/1LOpqvvGNEhEtwlEIWB1EnyHHMAuv3x9U/view" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Политика обработки персональных данных</a>
+            <a href="https://drive.google.com/file/d/1jVXxlq3I9YIp5UgCUHGxiylBgfazeBrm/view" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Согласие на обработку персональных данных</a>
+            <a href="https://drive.google.com/file/d/1ib1Cg-8_3euQHmsiZsXdpIXYfyX0TMv1/view" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-yellow-400">Публичная оферта</a>
           </nav>
         </div>
         <div className="mt-6 text-zinc-600">© {new Date().getFullYear()} Все права защищены</div>

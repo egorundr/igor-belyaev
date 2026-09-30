@@ -134,11 +134,25 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
         />
         <label htmlFor={`${mode}-consent`} className="cursor-pointer select-none leading-snug">
           Я даю{" "}
-          <a href="/legal/consent.pdf" download className="text-zinc-200 underline transition-colors hover:text-yellow-400">
+          <a
+            href={isMasterclass
+              ? "https://drive.google.com/file/d/1jVXxlq3I9YIp5UgCUHGxiylBgfazeBrm/view"
+              : "https://drive.google.com/file/d/1Az6vBCjpC2lnrKxvCkRIk8vtGkqKZv9C/view"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-200 underline transition-colors hover:text-yellow-400"
+          >
             согласие на обработку персональных данных
           </a>{" "}
           в соответствии с{" "}
-          <a href="/legal/privacy.pdf" download className="text-zinc-200 underline transition-colors hover:text-yellow-400">
+          <a
+            href={isMasterclass
+              ? "https://drive.google.com/file/d/1LOpqvvGNEhEtwlEIWB1EnyHHMAuv3x9U/view"
+              : "https://drive.google.com/file/d/18mjLhJ1Pk6L_Lg8o-heN4RLQOUA5L9-c/view"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-200 underline transition-colors hover:text-yellow-400"
+          >
             политикой обработки персональных данных
           </a>
           .

@@ -21,6 +21,10 @@ const nextConfig = {
         source: "/:path((?!legal/.*\\.pdf$).*)",
         headers: [{ key: "X-Frame-Options", value: "SAMEORIGIN" }],
       },
+      {
+        source: "/legal/:document.pdf",
+        headers: [{ key: "Cache-Control", value: "no-store, no-cache, must-revalidate" }],
+      },
     ]
   },
 }
