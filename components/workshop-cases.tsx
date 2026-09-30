@@ -3,27 +3,19 @@ import Image from "next/image"
 const audiences = [
   {
     title: "Руководителям и собственникам",
-    description: "Если нужно договариваться с партнёрами, командой и руководителями, отстаивать решения и сохранять рабочие отношения.",
-    image: "/audience/decisions.jpg",
-    alt: "Руководители обсуждают деловое решение",
+    description: "Чтобы договариваться с партнёрами и командой, отстаивать решения и сохранять рабочие отношения.",
   },
   {
     title: "Предпринимателям",
     description: "Для переговоров о сделках, долях, условиях сотрудничества и распределении ответственности.",
-    image: "/audience/entrepreneurs.jpg",
-    alt: "Предприниматели обсуждают условия сделки",
   },
   {
     title: "Экспертам и специалистам",
-    description: "Если результат зависит от умения обсуждать стоимость, условия работы и границы ответственности.",
-    image: "/audience/experts.jpg",
-    alt: "Специалисты обсуждают рабочие условия",
+    description: "Чтобы обсуждать стоимость, условия работы и границы ответственности.",
   },
   {
     title: "Тем, кому предстоят личные переговоры",
-    description: "Чтобы спокойнее обсуждать непростые вопросы, защищать свои интересы и искать взаимоприемлемые решения.",
-    image: "/audience/personal.jpg",
-    alt: "Люди обсуждают важный личный вопрос",
+    description: "Чтобы защищать свои интересы и искать взаимоприемлемые решения в непростых разговорах.",
   },
 ]
 
@@ -63,18 +55,23 @@ export function WorkshopCases() {
             Для тех, кому важно обсуждать сложные условия, сохранять свою позицию и приходить к договорённостям — в работе и личных вопросах.
           </p>
         </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {audiences.map((item) => (
-            <article key={item.title} className="overflow-hidden rounded-2xl bg-zinc-950">
-              <div className="relative aspect-[16/9]">
-                <Image src={item.image} alt={item.alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" />
-              </div>
-              <div className="flex flex-col gap-2 p-5 md:p-6">
-                <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                <p className="leading-relaxed text-zinc-400">{item.description}</p>
-              </div>
-            </article>
-          ))}
+        <div className="mt-8 grid items-center gap-6 md:grid-cols-2 md:gap-8">
+          <div className="flex flex-col gap-5">
+            {audiences.map((item) => (
+              <article key={item.title}>
+                <h3 className="text-lg font-bold text-white md:text-xl">{item.title}</h3>
+                <p className="mt-1 leading-relaxed text-zinc-400">{item.description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="relative aspect-[16/10] min-h-64 overflow-hidden rounded-2xl bg-zinc-950 md:min-h-80">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%D1%84%D0%B8%D0%BD%D0%B0%D0%BB2-4yKGjrh1JXF6P61jTD2tuzEratJ6zb.jpg"
+              alt="Женщина и мужчина обсуждают документ за столом переговоров"
+              className="absolute inset-0 size-full object-cover"
+              loading="lazy"
+            />
+          </div>
         </div>
       </section>
 
