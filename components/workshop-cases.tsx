@@ -64,7 +64,7 @@ export function WorkshopCases() {
               </article>
             ))}
           </div>
-          <div className="relative aspect-[16/10] min-h-64 overflow-hidden rounded-2xl bg-zinc-950 md:min-h-80">
+          <div className="relative aspect-[16/10] min-h-64 min-w-0 w-full overflow-hidden rounded-2xl bg-zinc-950 md:min-h-80">
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0%D1%84%D0%B8%D0%BD%D0%B0%D0%BB2-4yKGjrh1JXF6P61jTD2tuzEratJ6zb.jpg"
               alt="Женщина и мужчина обсуждают документ за столом переговоров"

@@ -87,7 +87,7 @@ export default function MasterPage() {
         </div>
 
         <div className="relative flex items-center px-5 pb-10 md:px-10 md:py-14 lg:p-0">
-          <div className="relative h-full min-h-[420px] w-full overflow-hidden rounded-2xl bg-white lg:rounded-none">
+          <div className="relative h-full min-h-[320px] w-full overflow-hidden rounded-2xl bg-white sm:min-h-[420px] lg:rounded-none">
             <img
               src="/expert-mk-hero.jpg"
               alt="Игорь Беляев — эксперт по переговорам"
