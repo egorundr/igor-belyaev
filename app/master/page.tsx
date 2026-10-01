@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 import { WorkshopCases } from "@/components/workshop-cases"
 
 const meta = [
-  { label: "Дата и время", value: "6 октября, 19:30" },
+  { label: "Дата и время", value: "13 октября, 19:30" },
   { label: "Формат", value: "Онлайн мастер-класс в Zoom" },
   { label: "Длительность", value: "2 часа" },
   { label: "Стоимость участия", value: "9 990 ₽" },
@@ -133,7 +133,7 @@ export default function MasterPage() {
             </div>
             <div className="flex max-w-[76ch] flex-col gap-4 text-base leading-relaxed text-zinc-400">
               <p>Более 20 лет работает с первыми лицами, топ-командами и управленческими структурами крупных корпораций, финансовых институтов и государственных организаций.</p>
-              <p>Специали������ируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов.</p>
+              <p>Специали��������ируется на сложных переговорах, переговорах под давлением, управленческом влиянии и работе с конфликтами интересов.</p>
               <p>Проводил стратегические сессии и программы для команд ВТБ, Яндекса, Билайна, Северстали, Правительства Москвы и других организаций.</p>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function MasterPage() {
             <h2 className={sectionTitle}>Стоимость и формат</h2>
             <div className="mt-6 flex flex-col gap-3 text-lg leading-relaxed text-zinc-200">
               <p className="font-bold">Онлайн мастер-класс в Zoom</p>
-              <p><span className="text-zinc-400">Дата и время:</span> 6 октября, 19:30</p>
+              <p><span className="text-zinc-400">Дата и время:</span> 13 октября, 19:30</p>
               <p><span className="text-zinc-400">Длительность:</span> 2 часа</p>
               <p><span className="text-zinc-400">Стоимость участия:</span> 9 990 рублей</p>
             </div>
