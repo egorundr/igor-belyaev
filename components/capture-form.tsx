@@ -166,7 +166,7 @@ export function CaptureForm({ mode = "guide" }: CaptureFormProps) {
         disabled={submitting}
         className="mt-1 h-14 w-full rounded-xl bg-yellow-400 text-base font-black uppercase tracking-wide text-black transition-colors hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {submitting ? (isMasterclass ? "Переход к оплате..." : "Отправка...") : isMasterclass ? "Оплатить — 9 990 рублей" : "Забрать гайд в Telegram"}
+        {submitting ? (isMasterclass ? "Переход к оплате..." : "Отправка...") : isMasterclass ? "Оплатить через СБП — 9 990 рублей" : "Забрать гайд в Telegram"}
       </button>
     </form>
   )

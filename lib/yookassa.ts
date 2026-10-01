@@ -76,6 +76,7 @@ export async function createYooKassaPayment({
     headers: { 'Idempotence-Key': checkoutKey },
     body: JSON.stringify({
       amount: { value: MASTERCLASS_AMOUNT, currency: 'RUB' },
+      payment_method_data: { type: 'sbp' },
       capture: true,
       confirmation: {
         type: 'redirect',
